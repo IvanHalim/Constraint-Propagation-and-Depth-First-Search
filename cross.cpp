@@ -23,11 +23,10 @@ vector<string> cross(string A, string B) {
 }
 
 int main() {
-    vector<string> x = cross("ABC", "123");
-    for (int i = 0; i < x.size(); i++) {
-        cout << x[i] << ' ';
-    }
-    cout << endl;
+    string digits = "123456789";
+    string rows = "ABCDEFGHI";
+    string cols = digits;
+    vector<string> squares = cross(rows, cols);
 
     return 0;
 }
