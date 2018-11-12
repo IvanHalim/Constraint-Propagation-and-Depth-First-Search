@@ -15,7 +15,7 @@ vector<string> cross(string A, string B) {
     vector<string> str;
     for (int i = 0; i < A.length(); i++) {
         for (int j = 0; j < B.length(); j++) {
-            str.push_back(concatenate(A[i],B[i]));
+            str.push_back(concatenate(A[i],B[j]));
         }
     }
 
