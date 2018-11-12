@@ -8,7 +8,9 @@ using std::string;
 using std::vector;
 
 string concatenate(char a, char b) {
-    return (string)a + (string)b;
+    string s = a;
+    s += b;
+    return s;
 }
 
 vector<string> cross(string A, string B) {
