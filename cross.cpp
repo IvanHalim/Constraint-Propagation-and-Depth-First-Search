@@ -7,15 +7,11 @@ using std::endl;
 using std::string;
 using std::vector;
 
-string concatenate(char a, char b) {
-    return string() + a + b;
-}
-
 vector<string> cross(string A, string B) {
-    vector<string> str;
+    vector<string> str(A.length() * B.length());
     for (int i = 0; i < A.length(); i++) {
         for (int j = 0; j < B.length(); j++) {
-            str.push_back(concatenate(A[i],B[j]));
+            str.push_back(A.substr(i, 1) + B.substr(j, 1)));
         }
     }
 
