@@ -29,16 +29,16 @@ int main() {
     vector<string> squares = cross(rows, cols);
     vector<vector<string> > unitlist;
     for (int i = 0; i < rows.length(); i++) {
-        unitlist.push_back(cross(rows[i], digits));
+        unitlist.push_back(cross(string() + rows[i], digits));
     }
     for (int i = 0; i < digits.length(); i++) {
-        unitlist.push_back(cross(rows, digits[i]));
+        unitlist.push_back(cross(rows, string() + digits[i]));
     }
     string x[3] = {"ABC", "DEF", "GHI"};
     string y[3] = {"123", "456", "789"};
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            unitlist.push_back(cross(x[i], y[j]));
+            unitlist.push_back(cross(string() + x[i], string() + y[j]));
         }
     }
 
