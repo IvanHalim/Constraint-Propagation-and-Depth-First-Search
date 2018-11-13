@@ -5,6 +5,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::substr;
 using std::vector;
 
 vector<string> cross(string A, string B) {
