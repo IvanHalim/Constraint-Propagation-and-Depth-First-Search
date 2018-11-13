@@ -11,7 +11,7 @@ vector<string> cross(string A, string B) {
     vector<string> str(A.length() * B.length());
     for (int i = 0; i < A.length(); i++) {
         for (int j = 0; j < B.length(); j++) {
-            str.push_back(A.substr(i, 1) + B.substr(j, 1)));
+            str.push_back(A.substr(i, 1) + B.substr(j, 1));
         }
     }
 
