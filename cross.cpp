@@ -5,11 +5,10 @@
 using std::cout;
 using std::endl;
 using std::string;
-using std::substr;
 using std::vector;
 
 vector<string> cross(string A, string B) {
-    vector<string> str(A.length() * B.length());
+    vector<string> str;
     for (int i = 0; i < A.length(); i++) {
         for (int j = 0; j < B.length(); j++) {
             str.push_back(A.substr(i, 1) + B.substr(j, 1));
@@ -23,19 +22,19 @@ int main() {
     string digits = "123456789";
     string rows = "ABCDEFGHI";
     string cols = digits;
+    string rows_threes[3] = {"ABC", "DEF", "GHI"};
+    string cols_threes[3] = {"123", "456", "789"};
     vector<string> squares = cross(rows, cols);
     vector<vector<string> > unitlist;
-    for (int i = 0; i < rows.length(); i++) {
-        unitlist.push_back(cross(string() + rows[i], digits));
+    for (int i = 0; i < 9; i++) {
+        unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
-    for (int i = 0; i < digits.length(); i++) {
-        unitlist.push_back(cross(rows, string() + digits[i]));
+    for (int i = 0; i < 9; i++) {
+        unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
-    string x[3] = {"ABC", "DEF", "GHI"};
-    string y[3] = {"123", "456", "789"};
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            unitlist.push_back(cross(string() + x[i], string() + y[j]));
+            unitlist.push_back(cross(rows_threes[i], cols_threes[j]));
         }
     }
 
