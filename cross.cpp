@@ -27,6 +27,27 @@ int main() {
     string rows = "ABCDEFGHI";
     string cols = digits;
     vector<string> squares = cross(rows, cols);
+    vector<vector<string>> unitlist;
+    for (int i = 0; i < rows.length(); i++) {
+        unitlist.push_back(cross(rows[i], digits));
+    }
+    for (int i = 0; i < digits.length(); i++) {
+        unitlist.push_back(cross(rows, digits[i]));
+    }
+    string x = {"ABC", "DEF", "GHI"};
+    string y = {"123", "456", "789"};
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            unitlist.push_back(cross(x[i], y[j]));
+        }
+    }
+
+    for (int i = 0; i < unitlist.size(); i++) {
+        for (int j = 0; j < 9; j++) {
+            cout << unitlist[i][j] << ' ';
+        }
+        cout << endl;
+    }
 
     return 0;
 }
