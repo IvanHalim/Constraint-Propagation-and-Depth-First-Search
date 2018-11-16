@@ -42,8 +42,8 @@ int main() {
     vector<string> squares = cross(rows, cols);
 
     /* unitlist = ([cross(rows, c) for c in cols] +
-     *     [cross(r, cols) for r in rows] +
-     *     [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
+     *             [cross(r, cols) for r in rows] +
+     *             [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
      */
     string rows_threes[3] = {"ABC", "DEF", "GHI"};
     string cols_threes[3] = {"123", "456", "789"};
@@ -60,6 +60,19 @@ int main() {
         }
     }
 
+    /*
+     * units = dict((s, [u for u in unitlist if s in u]) for s in squares)
+     *
+     *      can also be expressed as:
+     *
+     * units = {}
+     * for s in squares:
+     *     for u in unitlist:
+     *         if s in u:
+     *             if s not in units:
+     *                 units[s] = []
+     *             units[s].append(u)
+     */
     map<string, vector<vector<string>>> units;
     for (int i = 0; i < 81; i++) {
         for (int j = 0; j < 27; j++) {
