@@ -59,6 +59,7 @@ int main() {
             unitlist.push_back(cross(rows_threes[i], cols_threes[j]));
         }
     }
+
     map<string, vector<vector<string>>> units;
     for (int i = 0; i < 81; i++) {
         for (int j = 0; j < 27; j++) {
