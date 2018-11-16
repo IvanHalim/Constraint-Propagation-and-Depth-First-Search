@@ -91,5 +91,5 @@ def some(seq):
     return False
 
 if __name__ == '__main__':
-    grid2 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-    display(search(parse_grid(grid2)))
+    print(units)
+

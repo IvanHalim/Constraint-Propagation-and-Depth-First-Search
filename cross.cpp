@@ -49,10 +49,10 @@ int main() {
     string rows_threes[3] = {"ABC", "DEF", "GHI"};
     string cols_threes[3] = {"123", "456", "789"};
     vector<vector<string>> unitlist;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < rows.length(); i++) {
         unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < digits.length(); i++) {
         unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
     for (int i = 0; i < 3; i++) {
@@ -75,8 +75,8 @@ int main() {
      *             units[s].append(u)
      */
     map<string, vector<vector<string>>> units;
-    for (int i = 0; i < 81; i++) {
-        for (int j = 0; j < 27; j++) {
+    for (int i = 0; i < squares.size(); i++) {
+        for (int j = 0; j < unitlist.size(); j++) {
             if (vector_contains(unitlist[j], squares[i])) {
                 units[squares[i]].push_back(unitlist[j]);
             }
