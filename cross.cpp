@@ -20,13 +20,12 @@ vector<string> cross(string A, string B) {
 }
 
 bool vector_contains(vector<string> u, string s) {
-    bool contains = false;
     for (int i = 0; i < u.size(); i++) {
         if (u[i] == s) {
-            contains = true;
+            return true;
         }
     }
-    return contains;
+    return false;
 }
 
 int main() {
