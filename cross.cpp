@@ -1,11 +1,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+#include <algorithm>
 
 using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
+using std::map;
+using std::find;
 
 vector<string> cross(string A, string B) {
     vector<string> str;
@@ -14,8 +18,14 @@ vector<string> cross(string A, string B) {
             str.push_back(A.substr(i, 1) + B.substr(j, 1));
         }
     }
-
     return str;
+}
+
+bool vector_contains(vector<string> u, string s) {
+    if (find(u.begin(), u.end(), s) != u.end()) {
+        return true;
+    }
+    return false;
 }
 
 int main() {
@@ -25,7 +35,7 @@ int main() {
     string rows_threes[3] = {"ABC", "DEF", "GHI"};
     string cols_threes[3] = {"123", "456", "789"};
     vector<string> squares = cross(rows, cols);
-    vector<vector<string> > unitlist;
+    vector<vector<string>> unitlist;
     for (int i = 0; i < 9; i++) {
         unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
@@ -37,12 +47,13 @@ int main() {
             unitlist.push_back(cross(rows_threes[i], cols_threes[j]));
         }
     }
-
-    for (int i = 0; i < unitlist.size(); i++) {
-        for (int j = 0; j < 9; j++) {
-            cout << unitlist[i][j] << ' ';
+    map<string, vector<vector<string>>> units;
+    for (int i = 0; i < 81; i++) {
+        for (int j = 0; j < 27; j++) {
+            if (vector_contains(unitlist[j], squares[i])) {
+                units[squares[i]].push_back(unitlist[j]);
+            }
         }
-        cout << endl;
     }
 
     return 0;
