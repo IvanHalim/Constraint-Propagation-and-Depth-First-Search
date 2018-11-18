@@ -2,12 +2,15 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <set>
+#include <iterator>
 
 using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
 using std::map;
+using std::set;
 
 /*
  * def cross(A, B):
@@ -81,6 +84,24 @@ int main() {
                 units[squares[i]].push_back(unitlist[j]);
             }
         }
+    }
+
+    map<string, set<string>> peers;
+    for (int i = 0; i < squares.size(); i++) {
+        for (int j = 0; j < units[squares[i]].size(); j++) {
+            for (int k = 0; k < units[squares[i]][j].size(); k++) {
+                peers[squares[i]].insert(units[squares[i]][j][k]);
+            }
+            peers[squares[i]].erase(squares[i]);
+        }
+    }
+
+    for (map<string, set<string>>::iterator i = peers.begin(); i != peers.end(); i++) {
+        cout << i->first << ": ";
+        for (set<string>::iterator j = (i->second).begin(); j != (i->second).end(); j++) {
+            cout << *j << ' ';
+        }
+        cout << endl;
     }
 
     return 0;
