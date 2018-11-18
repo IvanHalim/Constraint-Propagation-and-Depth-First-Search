@@ -74,7 +74,7 @@ int main() {
      *     for u in unitlist:
      *         if s in u:
      *             if s not in units:
-     *                 units[s] = []
+                       units[s] = []
      *             units[s].append(u)
      */
     map<string, vector<vector<string>>> units;
@@ -86,6 +86,20 @@ int main() {
         }
     }
 
+    /*
+     * peers = dict((s, set(sum(units[s],[]))-set([s])) for s in squares)
+     *
+     *      can also be expressed as:
+     *
+     * peers = {}
+     * for s in squares:
+     *     temp = set()
+     *     for u in units[s]:
+     *         for square in u:
+     *             temp.add(square)
+     *     temp.remove(s)
+     *     peers[s] = temp
+     */
     map<string, set<string>> peers;
     for (int i = 0; i < squares.size(); i++) {
         for (int j = 0; j < units[squares[i]].size(); j++) {
