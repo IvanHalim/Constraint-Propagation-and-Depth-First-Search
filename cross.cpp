@@ -92,8 +92,8 @@ int main() {
             for (int k = 0; k < units[squares[i]][j].size(); k++) {
                 peers[squares[i]].insert(units[squares[i]][j][k]);
             }
-            peers[squares[i]].erase(squares[i]);
         }
+        peers[squares[i]].erase(squares[i]);
     }
 
     for (map<string, set<string>>::iterator i = peers.begin(); i != peers.end(); i++) {
