@@ -71,10 +71,9 @@ int main() {
      *
      * units = {}
      * for s in squares:
+     *     units[s] = []
      *     for u in unitlist:
      *         if s in u:
-     *             if s not in units:
-                       units[s] = []
      *             units[s].append(u)
      */
     map<string, vector<vector<string>>> units;
@@ -93,12 +92,11 @@ int main() {
      *
      * peers = {}
      * for s in squares:
-     *     temp = set()
+     *     peers[s] = set()
      *     for u in units[s]:
      *         for square in u:
-     *             temp.add(square)
-     *     temp.remove(s)
-     *     peers[s] = temp
+     *             peers[s].add(square)
+     *     peers[s].remove(s)
      */
     map<string, set<string>> peers;
     for (int i = 0; i < squares.size(); i++) {
