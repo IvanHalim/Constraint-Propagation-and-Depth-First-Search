@@ -144,3 +144,18 @@ void sudoku::display_units() {
         }
     }
 }
+
+/*
+ * def grid_values(grid):
+ *     chars = [c for c in grid if c in digits or c in '0.']
+ *     assert len(chars) == 81
+ *     return dict(zip(squares, chars))
+ */
+map<string, string> grid_values(string grid) {
+    assert(grid.length() == squares.size());
+    map<string, string> values;
+    for (int i = 0; i < squares.size(); i++) {
+        values[squares[i]] = grid.substr(i, 1);
+    }
+    return values;
+}

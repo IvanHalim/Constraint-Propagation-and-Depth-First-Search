@@ -91,5 +91,6 @@ def some(seq):
     return False
 
 if __name__ == '__main__':
-    print(peers)
+    grid1 = '.....6....59.....82....8....45........3........6..3.54...325..6..................'
+    print(grid_values(grid1))
 
