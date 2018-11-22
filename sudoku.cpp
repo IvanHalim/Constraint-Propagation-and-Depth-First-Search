@@ -43,7 +43,7 @@ bool vector_contains(vector<string> u, string s) {
  * A utility function to check whether a string contains a particular substring
  */
 bool string_contains(string str, string substring) {
-    if (str.find(substring) != npos)
+    if (str.find(substring) != string::npos)
         return true;
     return false;
 }
@@ -160,7 +160,7 @@ void sudoku::display_units() {
  *     assert len(chars) == 81
  *     return dict(zip(squares, chars))
  */
-map<string, string> grid_values(string grid) {
+map<string, string> sudoku::grid_values(string grid) {
     vector<string> chars;
     for (int i = 0; i < grid.length(); i++) {
         if (string_contains(digits, grid.substr(i, 1)) || string_contains("0.", grid.substr(i, 1))) {

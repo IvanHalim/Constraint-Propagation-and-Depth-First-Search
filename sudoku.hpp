@@ -25,5 +25,6 @@ class sudoku {
         void display_unitlist();
         void display_units();
         void display_peers();
+        map<string, string> grid_values(string);
 };
 #endif
