@@ -113,6 +113,16 @@ sudoku::sudoku() {
     }
 }
 
+void sudoku::display_unitlist() {
+    for (int i = 0; i < unitlist.size(); i++) {
+        cout << i + 1 << ": ";
+        for (int j = 0; j < unitlist[i].size(); j++) {
+            cout << unitlist[i][j] << ' ';
+        }
+        cout << endl;
+    }
+}
+
 void sudoku::display_peers() {
     for (map<string, set<string>>::iterator i = peers.begin(); i != peers.end(); i++) {
         cout << i->first << ": ";
