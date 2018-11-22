@@ -4,6 +4,7 @@
 #include <map>
 #include <set>
 #include <iterator>
+#include <cassert>
 #include "sudoku.hpp"
 
 using std::cout;
