@@ -4,6 +4,7 @@
 #include <map>
 #include <set>
 #include <iterator>
+#include "sudoku.hpp"
 
 using std::cout;
 using std::endl;
@@ -38,20 +39,21 @@ bool vector_contains(vector<string> u, string s) {
     return false;
 }
 
-int main() {
-    string digits = "123456789";
-    string rows = "ABCDEFGHI";
-    string cols = digits;
-    vector<string> squares = cross(rows, cols);
+sudoku::sudoku() {
+    digits = "123456789";
+    rows = "ABCDEFGHI";
+    cols = digits;
+    squares = cross(rows, cols);
 
     /*
+     * Creating vector<vector<string>> unitlist:
+     *
      * unitlist = ([cross(rows, c) for c in cols] +
      *             [cross(r, cols) for r in rows] +
      *             [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
      */
     string rows_threes[3] = {"ABC", "DEF", "GHI"};
     string cols_threes[3] = {"123", "456", "789"};
-    vector<vector<string>> unitlist;
     for (int i = 0; i < rows.length(); i++) {
         unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
@@ -65,6 +67,8 @@ int main() {
     }
 
     /*
+     * Creating map<string, vector<vector<string>>> units:
+     *
      * units = dict((s, [u for u in unitlist if s in u]) for s in squares)
      *
      *      can also be expressed as:
@@ -76,7 +80,6 @@ int main() {
      *         if s in u:
      *             units[s].append(u)
      */
-    map<string, vector<vector<string>>> units;
     for (int i = 0; i < squares.size(); i++) {
         for (int j = 0; j < unitlist.size(); j++) {
             if (vector_contains(unitlist[j], squares[i])) {
@@ -86,6 +89,8 @@ int main() {
     }
 
     /*
+     * Creating map<string, set<string>> peers:
+     *
      * peers = dict((s, set(sum(units[s],[]))-set([s])) for s in squares)
      *
      *      can also be expressed as:
@@ -98,7 +103,6 @@ int main() {
      *             peers[s].add(square)
      *     peers[s].remove(s)
      */
-    map<string, set<string>> peers;
     for (int i = 0; i < squares.size(); i++) {
         for (int j = 0; j < units[squares[i]].size(); j++) {
             for (int k = 0; k < units[squares[i]][j].size(); k++) {
@@ -107,7 +111,9 @@ int main() {
         }
         peers[squares[i]].erase(squares[i]);
     }
+}
 
+void sudoku::display_peers() {
     for (map<string, set<string>>::iterator i = peers.begin(); i != peers.end(); i++) {
         cout << i->first << ": ";
         for (set<string>::iterator j = (i->second).begin(); j != (i->second).end(); j++) {
@@ -115,6 +121,16 @@ int main() {
         }
         cout << endl;
     }
+}
 
-    return 0;
+void sudoku::display_units() {
+    for (map<string, vector<vector<string>>>::iterator i = units.begin(); i != units.end(); i++) {
+        cout << i->first << ':' << endl;
+        for (int j = 0; j < (i->second).size(); j++) {
+            for (int k = 0; k < (i->second)[j].size(); k++) {
+                cout << (i->second)[j][k] << ' ';
+            }
+            cout << endl;
+        }
+    }
 }
