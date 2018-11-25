@@ -276,11 +276,10 @@ bool sudoku::eliminate(map<string, string> &values, string s, string d) {
 void sudoku::display(map<string, string> values) {
     int width = 0;
     for (int i = 0; i < squares.size(); i++) {
-        if (values[squares[i]].length() > width) {
-            width = values[squares[i]].length();
+        if (values[squares[i]].length() + 1 > width) {
+            width = values[squares[i]].length() + 1;
         }
     }
-    width++;
     string line;
     for (int i = 0; i < rows.length(); i++) {
         for (int j = 0; j < width; j++) {
