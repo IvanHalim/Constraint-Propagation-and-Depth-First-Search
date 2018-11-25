@@ -21,6 +21,7 @@ class sudoku {
         vector<vector<string> > unitlist;
         map<string, vector<vector<string> > > units;
         map<string, set<string> > peers;
+
         //Helper functions
         map<string, string> grid_values(string);
         bool assign(map<string, string>&, string, string);
