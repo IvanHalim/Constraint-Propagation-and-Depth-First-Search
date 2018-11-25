@@ -149,38 +149,6 @@ sudoku::sudoku() {
     }
 }
 
-void sudoku::display_unitlist() {
-    for (int i = 0; i < unitlist.size(); i++) {
-        cout << i + 1 << ": ";
-        for (int j = 0; j < unitlist[i].size(); j++) {
-            cout << unitlist[i][j] << ' ';
-        }
-        cout << endl;
-    }
-}
-
-void sudoku::display_peers() {
-    for (map<string, set<string> >::iterator i = peers.begin(); i != peers.end(); i++) {
-        cout << i->first << ": ";
-        for (set<string>::iterator j = (i->second).begin(); j != (i->second).end(); j++) {
-            cout << *j << ' ';
-        }
-        cout << endl;
-    }
-}
-
-void sudoku::display_units() {
-    for (map<string, vector<vector<string> > >::iterator i = units.begin(); i != units.end(); i++) {
-        cout << i->first << ':' << endl;
-        for (int j = 0; j < (i->second).size(); j++) {
-            for (int k = 0; k < (i->second)[j].size(); k++) {
-                cout << (i->second)[j][k] << ' ';
-            }
-            cout << endl;
-        }
-    }
-}
-
 /*
  * def grid_values(grid):
  *     chars = [c for c in grid if c in digits or c in '0.']
