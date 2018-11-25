@@ -20,12 +20,12 @@ class sudoku {
         vector<vector<string> > unitlist;
         map<string, vector<vector<string> > > units;
         map<string, set<string> > peers;
-    public:
-        sudoku();
         map<string, string> grid_values(string);
-        map<string, string> parse_grid(string);
         bool assign(map<string, string>&, string, string);
         bool eliminate(map<string, string>&, string, string);
+    public:
+        sudoku();
+        map<string, string> parse_grid(string);
         void display(map<string, string>);
 };
 #endif
