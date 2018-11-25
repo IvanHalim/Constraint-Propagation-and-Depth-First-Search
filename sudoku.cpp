@@ -13,6 +13,7 @@ using std::string;
 using std::vector;
 using std::map;
 using std::set;
+using std::
 
 /*
  * def cross(A, B):
@@ -44,9 +45,21 @@ bool vector_contains(vector<string> u, string s) {
  * A utility function to check whether a string contains a particular substring
  */
 bool string_contains(string str, string substring) {
-    if (str.find(substring) != string::npos)
+    if (str.find(substring) != string::npos) {
         return true;
+    }
     return false;
+}
+
+/*
+ * A utility function to erase a substring from a string
+ */
+string string_eliminate(string str, string substring) {
+    string::size_type position = str.find(substring);
+    if (position == string::npos) {
+        return str;
+    }
+    return str.replace(position, substring.length(), "");
 }
 
 sudoku::sudoku() {
@@ -174,4 +187,98 @@ map<string, string> sudoku::grid_values(string grid) {
         values[squares[i]] = chars[i];
     }
     return values;
+}
+
+/* def eliminate(values, s, d):
+ *     if d not in values[s]:
+ *         return values
+ *     values[s] = values[s].replace(d,'')
+ *     if len(values[s]) == 0:
+ *         return False
+ *     elif len(values[s]) == 1:
+ *         d2 = values[s]
+ *         if not all(eliminate(values, s2, d2) for s2 in peers[s]):
+ *             return False
+ *     for u in units[s]:
+ *         dplaces = [s for s in u if d in values[s]]
+ *         if len(dplaces) == 0:
+ *             return False
+ *         elif len(dplaces) == 1:
+ *             if not assign(values, dplaces[0], d):
+ *                 return False
+ *     return values
+ */
+bool sudoku::eliminate(map<string, string> &values, string s, string d) {
+    if (!string_contains(values[s], d)) {
+        return true;
+    }
+    values[s] = string_eliminate(values[s], d);
+    if (values[s].length() == 0) {
+        return false;
+    } else if (values[s].length() == 1) {
+        string d2 = values[s];
+        for (set<string>::iterator i = peers[s].begin(); i != peers[s].end(); i++) {
+            if (!eliminate(values, *i, d2)) {
+                return false;
+            }
+        }
+    }
+    for (int i = 0; i < groups_of[k].size(); i++) {
+        int x = groups_of[k][i];
+        int n = 0;
+        int ks;
+        for (int j = 0; j < 9; j++) {
+            int p = group[x][j];
+            if (cells[p].is_on(val)) {
+                ks = p;
+                n++;
+            }
+        }
+        if (n == 0) {
+            return false;
+        } else if (n == 1) {
+            if (!assign(ks, val)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/*
+ * def parse_grid(grid):
+ *     values = dict((s, digits) for s in squares)
+ *     for s,d in grid_values(grid).items():
+ *         if d in digits and not assign(values, s, d):
+ *             return False ## (Fail if we can't assign d to square s.)
+ *     return values
+ */
+map<string, string> sudoku::parse_grid(string grid) {
+    map<string, string> values;
+    for (int i = 0; i < squares.size(); i++) {
+        values[squares[i]] = digits;
+    }
+    if (string_contains(digits, d) && !assign(values, s, d)) {
+
+    }
+    return values;
+}
+
+/*
+ * def assign(values, s, d):
+ *     other_values = values[s].replace(d, '')
+ *     if all(eliminate(values, s, d2) for d2 in other_values):
+ *         return values
+ *     else:
+ *         return False
+ */
+bool sudoku::assign(map<string, string> &values, string s, string d) {
+    string other_values = string_eliminate(values[s], d);
+    for (int i = 0; i < other_values.length(); i++) {
+        string d2 = other_values.substr(i, 1);
+        if (!eliminate(values, s, d2)) {
+            return false;
+        }
+    }
+    return true;
 }

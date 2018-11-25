@@ -71,7 +71,8 @@ def display(values):
         if r in 'CF': print(line)
     print
 
-def solve(grid): return search(parse_grid(grid))
+def solve(grid):
+    return search(parse_grid(grid))
 
 def search(values):
     "Using depth-first search and propagation, try all possible values."
