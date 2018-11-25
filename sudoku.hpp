@@ -17,9 +17,9 @@ class sudoku {
         string rows;
         string cols;
         vector<string> squares;
-        vector<vector<string>> unitlist;
-        map<string, vector<vector<string>>> units;
-        map<string, set<string>> peers;
+        vector<vector<string> > unitlist;
+        map<string, vector<vector<string> > > units;
+        map<string, set<string> > peers;
     public:
         sudoku();
         void display_unitlist();
