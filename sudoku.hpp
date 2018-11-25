@@ -13,6 +13,7 @@ using std::set;
 
 class sudoku {
     private:
+        //Variables
         string digits;
         string rows;
         string cols;
@@ -20,6 +21,7 @@ class sudoku {
         vector<vector<string> > unitlist;
         map<string, vector<vector<string> > > units;
         map<string, set<string> > peers;
+        //Helper functions
         map<string, string> grid_values(string);
         bool assign(map<string, string>&, string, string);
         bool eliminate(map<string, string>&, string, string);
