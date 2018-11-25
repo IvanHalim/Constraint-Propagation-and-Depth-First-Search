@@ -75,6 +75,16 @@ string center_string(string str, int width) {
     return centered;
 }
 
+int find_max_length(map<string, string> values) {
+    int max_length = 0;
+    for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
+        if ((i->second).length() > max_length) {
+            max_length = (i->second).length();
+        }
+    }
+    return max_length;
+}
+
 sudoku::sudoku() {
     digits = "123456789";
     rows = "ABCDEFGHI";
@@ -274,12 +284,7 @@ bool sudoku::eliminate(map<string, string> &values, string s, string d) {
  *     print
  */
 void sudoku::display(map<string, string> values) {
-    int width = 0;
-    for (int i = 0; i < squares.size(); i++) {
-        if (values[squares[i]].length() + 1 > width) {
-            width = values[squares[i]].length() + 1;
-        }
-    }
+    int width = 1 + find_max_length(values);
     string line;
     for (int i = 0; i < rows.length(); i++) {
         for (int j = 0; j < width; j++) {
