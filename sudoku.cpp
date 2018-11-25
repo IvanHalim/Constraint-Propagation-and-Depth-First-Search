@@ -61,6 +61,20 @@ string string_eliminate(string str, string substring) {
     return str.replace(position, substring.length(), "");
 }
 
+string center_string(string str, int width) {
+    int leading_spaces = (width - str.length()) / 2;
+    int trailing_spaces = width - str.length() - leading_spaces;
+    string centered;
+    for (int i = 0; i < leading_spaces; i++) {
+        centered += " ";
+    }
+    centered += str;
+    for (int i = 0; i < trailing_spaces; i++) {
+        centered += " ";
+    }
+    return centered;
+}
+
 sudoku::sudoku() {
     digits = "123456789";
     rows = "ABCDEFGHI";
@@ -279,4 +293,45 @@ bool sudoku::eliminate(map<string, string> &values, string s, string d) {
         }
     }
     return true;
+}
+
+/*
+ * def display(values):
+ *     width = 1+max(len(values[s]) for s in squares)
+ *     line = '+'.join(['-'*(width*3)]*3)
+ *     for r in rows:
+ *         print ''.join(values[r+c].center(width)+('|' if c in '36' else '') for c in cols)
+ *         if r in 'CF':
+ *             print line
+ *     print
+ */
+void sudoku::display(map<string, string> values) {
+    int width = 0;
+    for (int i = 0; i < squares.size(); i++) {
+        if (values[squares[i]].length() > width) {
+            width = values[squares[i]].length();
+        }
+    }
+    width++;
+    string line;
+    for (int i = 0; i < rows.length(); i++) {
+        for (int j = 0; j < width; j++) {
+            line += "-";
+        }
+        if (i+1 == 3 || i+1 == 6) {
+            line += "+";
+        }
+    }
+    for (int i = 0; i < rows.length(); i++) {
+        for (int j = 0; j < cols.length(); j++) {
+            cout << center_string(values[squares[i*9+j]], width);
+            if (j+1 == 3 || j+1 == 6) {
+                cout << "|";
+            }
+        }
+        cout << endl;
+        if (i+1 == 3 || i+1 == 6) {
+            cout << line << endl;
+        }
+    }
 }

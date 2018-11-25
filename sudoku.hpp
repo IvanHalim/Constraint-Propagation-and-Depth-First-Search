@@ -29,5 +29,6 @@ class sudoku {
         map<string, string> parse_grid(string);
         bool assign(map<string, string>&, string, string);
         bool eliminate(map<string, string>&, string, string);
+        void display(map<string, string>);
 };
 #endif
