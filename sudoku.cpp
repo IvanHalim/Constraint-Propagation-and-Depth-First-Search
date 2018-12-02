@@ -18,7 +18,7 @@ using std::set;
  * def cross(A, B):
  *     return [a+b for a in A for b in B]
  */
-vector<string> cross(const string& A, const string& B) {
+vector<string> cross(string A, string B) {
     vector<string> str;
     for (int i = 0; i < A.length(); i++) {
         for (int j = 0; j < B.length(); j++) {
@@ -31,7 +31,7 @@ vector<string> cross(const string& A, const string& B) {
 /*
  * A utility function to check whether a string vector contains a particular string
  */
-bool vector_contains(const vector<string>& u, const string& s) {
+bool vector_contains(vector<string> u, string s) {
     for (int i = 0; i < u.size(); i++) {
         if (u[i] == s) {
             return true;
@@ -43,7 +43,7 @@ bool vector_contains(const vector<string>& u, const string& s) {
 /*
  * A utility function to check whether a string contains a particular substring
  */
-bool string_contains(const string& str, const string& substring) {
+bool string_contains(string str, string substring) {
     if (str.find(substring) != string::npos) {
         return true;
     }
@@ -61,7 +61,7 @@ string string_eliminate(string str, string substring) {
     return str.replace(position, substring.length(), "");
 }
 
-string center_string(const string& str, const int& width) {
+string center_string(string str, int width) {
     int leading_spaces = (width - str.length()) / 2;
     int trailing_spaces = width - str.length() - leading_spaces;
     string centered;
