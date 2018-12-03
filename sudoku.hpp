@@ -14,21 +14,21 @@ using std::set;
 class sudoku {
     private:
         //Variables
-        string digits;
-        string rows;
-        string cols;
-        vector<string> squares;
-        vector<vector<string> > unitlist;
-        map<string, vector<vector<string> > > units;
-        map<string, set<string> > peers;
+        string                                  digits;
+        string                                  rows;
+        string                                  cols;
+        vector<string>                          squares;
+        vector<vector<string> >                 unitlist;
+        map<string, vector<vector<string> > >   units;
+        map<string, set<string> >               peers;
 
         //Helper functions
-        map<string, string> grid_values(string);
-        bool assign(map<string, string>&, string, string);
-        bool eliminate(map<string, string>&, string, string);
+        map<string, string>     grid_values(string);
+        bool                    assign(map<string, string>&, string, string);
+        bool                    eliminate(map<string, string>&, string, string);
     public:
         sudoku();
-        map<string, string> parse_grid(string);
-        void display(map<string, string>);
+        map<string, string>     parse_grid(string);
+        void                    display(map<string, string>);
 };
 #endif
