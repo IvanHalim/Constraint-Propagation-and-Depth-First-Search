@@ -14,6 +14,10 @@ using std::vector;
 using std::map;
 using std::set;
 
+/********************************************************************
+                            HELPER FUNCTIONS
+********************************************************************/
+
 /*
  * def cross(A, B):
  *     return [a+b for a in A for b in B]
@@ -229,6 +233,10 @@ map<string, string> sudoku::grid_values(string grid) {
     return grid_val;
 }
 
+/********************************************************************
+                    PART I: CONSTRAINT PROPAGATION
+********************************************************************/
+
 /*
  * This function uses constraint propagation to compute all the possible numbers
  * in each square based on the initial input. You may think of 'propagation' as
@@ -331,48 +339,9 @@ bool sudoku::eliminate(map<string, string> &values, string s, string d) {
     return true;
 }
 
-/*
- * def display(values):
- *     width = 1+max(len(values[s]) for s in squares)
- *     line = '+'.join(['-'*(width*3)]*3)
- *     for r in rows:
- *         print ''.join(values[r+c].center(width)+('|' if c in '36' else '') for c in cols)
- *         if r in 'CF':
- *             print line
- *     print
- */
-void sudoku::display(map<string, string> values) {
-    int width = 1 + find_max_length(values);
-    string line;
-    for (int i = 0; i < rows.length(); i++) {
-        for (int j = 0; j < width; j++) {
-            line += "-";
-        }
-        if (i+1 == 3 || i+1 == 6) {
-            line += "+";
-        }
-    }
-    for (int i = 0; i < rows.length(); i++) {
-        for (int j = 0; j < cols.length(); j++) {
-            cout << center_string(values[squares[i*9+j]], width);
-            if (j+1 == 3 || j+1 == 6) {
-                cout << "|";
-            }
-        }
-        cout << endl;
-        if (i+1 == 3 || i+1 == 6) {
-            cout << line << endl;
-        }
-    }
-}
-
-void sudoku::display_input() {
-    display(input);
-}
-
-void sudoku::display_solution() {
-    display(solution);
-}
+/********************************************************************
+                    PART II: RECURSIVE SEARCH
+********************************************************************/
 
 /*
  * After some values have been eliminated, if there are still unsolved squares,
@@ -415,4 +384,47 @@ bool sudoku::solve(string grid) {
         return false;
     }
     return true;
+}
+
+/*
+ * def display(values):
+ *     width = 1+max(len(values[s]) for s in squares)
+ *     line = '+'.join(['-'*(width*3)]*3)
+ *     for r in rows:
+ *         print ''.join(values[r+c].center(width)+('|' if c in '36' else '') for c in cols)
+ *         if r in 'CF':
+ *             print line
+ *     print
+ */
+void sudoku::display(map<string, string> values) {
+    int width = 1 + find_max_length(values);
+    string line;
+    for (int i = 0; i < rows.length(); i++) {
+        for (int j = 0; j < width; j++) {
+            line += "-";
+        }
+        if (i+1 == 3 || i+1 == 6) {
+            line += "+";
+        }
+    }
+    for (int i = 0; i < rows.length(); i++) {
+        for (int j = 0; j < cols.length(); j++) {
+            cout << center_string(values[squares[i*9+j]], width);
+            if (j+1 == 3 || j+1 == 6) {
+                cout << "|";
+            }
+        }
+        cout << endl;
+        if (i+1 == 3 || i+1 == 6) {
+            cout << line << endl;
+        }
+    }
+}
+
+void sudoku::display_input() {
+    display(input);
+}
+
+void sudoku::display_solution() {
+    display(solution);
 }
