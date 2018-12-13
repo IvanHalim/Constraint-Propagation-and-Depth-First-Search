@@ -128,6 +128,7 @@ bool solved(map<string, string> values) {
  * This function displays the values in a hash map as a sudoku grid
  *
  * def display(values):
+ *     "Display these values as a 2-D grid."
  *     width = 1+max(len(values[s]) for s in squares)
  *     line = '+'.join(['-'*(width*3)]*3)
  *     for r in rows:
@@ -397,10 +398,11 @@ bool sudoku::eliminate(map<string, string> &values, string s, string d) {
  * use a trial-and-error algorithm to solve the remaining squares
  *
  * def search(values):
+ *     "Using depth-first search and propagation, try all possible values."
  *     if values is False:
- *         return False
+ *         return False ## Failed earlier
  *     if all(len(values[s]) == 1 for s in squares):
- *         return values
+ *         return values ## Solved!
  *     ## Chose the unfilled square s with the fewest possibilities
  *     n,s = min((len(values[s]), s) for s in squares if len(values[s]) > 1)
  *     return some(search(assign(values.copy(), s, d))
