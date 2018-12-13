@@ -439,3 +439,7 @@ void sudoku::display_input() {
 void sudoku::display_solution() {
     display(solution);
 }
+
+map<string, string> sudoku::get_solution() {
+    return solution;
+}

@@ -36,5 +36,6 @@ class sudoku {
         bool                    solve(string);
         void                    display_input();
         void                    display_solution();
+        map<string, string>     get_solution();
 };
 #endif
