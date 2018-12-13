@@ -91,7 +91,7 @@ string find_min_possibilities(map<string, string> &values) {
     int min_length = 10;
     string min_square;
     for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
-        if ((i->second).length() < min_length) {
+        if ((i->second).length() < min_length && (i->second).length() > 1) {
             min_length = (i->second).length();
             min_square = i->first;
         }
@@ -368,14 +368,16 @@ bool sudoku::search(map<string, string> &values) {
         return true;
     }
     string min_square = find_min_possibilities(values);
+    map<string, string> copy = values;
     for (int i = 0; i < values[min_square].length(); i++) {
-        map<string, string> copy = values;
-        if(assign(copy, min_square, values[min_square].substr(i, 1))) {
-            if (search(copy)) {
+        values = copy;
+        if(assign(values, min_square, values[min_square].substr(i, 1))) {
+            if (search(values)) {
                 return true;
             }
         }
     }
+    values["A1"] = "false";
     return false;
 }
 
