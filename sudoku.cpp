@@ -46,8 +46,9 @@ bool vector_contains(vector<string> u, string s) {
 bool string_contains(string str, string substring) {
     if (str.find(substring) != string::npos) {
         return true;
+    } else {
+        return false;
     }
-    return false;
 }
 
 /*
@@ -57,8 +58,9 @@ string string_eliminate(string str, string substring) {
     string::size_type position = str.find(substring);
     if (position == string::npos) {
         return str;
+    } else {
+        return str.replace(position, substring.length(), "");
     }
-    return str.replace(position, substring.length(), "");
 }
 
 string center_string(string str, int width) {
@@ -83,6 +85,18 @@ int find_max_length(map<string, string> values) {
         }
     }
     return max_length;
+}
+
+string find_min_possibilities(map<string, string> values) {
+    int min_length = 10;
+    string min_square;
+    for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
+        if ((i->second).length() < min_length) {
+            min_length = (i->second).length();
+            min_square = i->first;
+        }
+    }
+    return min_square;
 }
 
 bool solved(map<string, string> values) {
@@ -240,7 +254,8 @@ bool sudoku::assign(map<string, string> &values, string s, string d) {
     return true;
 }
 
-/* def eliminate(values, s, d):
+/*
+ * def eliminate(values, s, d):
  *     if d not in values[s]:
  *         return values
  *     values[s] = values[s].replace(d,'')
