@@ -391,5 +391,6 @@ bool sudoku::search(map<string, string> &values) {
 
 bool sudoku::solve(string grid) {
     parse_grid(grid);
+    display_solution();
     return search(solution);
 }
