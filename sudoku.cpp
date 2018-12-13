@@ -390,6 +390,10 @@ bool sudoku::solve(string grid) {
     return true;
 }
 
+/***************************************************************************************
+                                ADDITIONAL FUNCTIONS
+***************************************************************************************/
+
 /*
  * def display(values):
  *     width = 1+max(len(values[s]) for s in squares)
