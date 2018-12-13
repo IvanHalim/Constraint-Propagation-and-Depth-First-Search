@@ -87,7 +87,7 @@ int find_max_length(map<string, string> values) {
     return max_length;
 }
 
-string find_min_possibilities(map<string, string> values) {
+string find_min_possibilities(map<string, string> &values) {
     int min_length = 10;
     string min_square;
     for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
@@ -368,11 +368,12 @@ bool sudoku::search(map<string, string> &values) {
         return true;
     }
     string min_square = find_min_possibilities(values);
-    map<string, string> copy = values;
     for (int i = 0; i < values[min_square].length(); i++) {
-        values = copy;
-        assign(values, min_square, values[min_square].substr(i, 1));
-        if (search(values)) {
+        map<string, string> copy = values;
+        if(!assign(copy, min_square, values[min_square].substr(i, 1))) {
+            return false;
+        }
+        if (search(copy)) {
             return true;
         }
     }
