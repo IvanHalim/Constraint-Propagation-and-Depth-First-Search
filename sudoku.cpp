@@ -361,11 +361,25 @@ void sudoku::display_solution() {
  *     return some(search(assign(values.copy(), s, d))
  *                for d in values[s])
  */
-/*bool sudoku::search(map<string, string> values) {
+bool sudoku::search(map<string, string> &values) {
     if (values["A1"] == "false") {
         return false;
     } else if (solved(values)) {
         return true;
     }
+    string min_square = find_min_possibilities(values);
+    for (int i = 0; i < values[min_square].length(); i++) {
+        map<string, string> copy = values;
+        assign(copy, min_square, values[min_square].substr(i, 1));
+        if (search(copy)) {
+            values[min_square] = values[min_square].substr(i, 1);
+            return true;
+        }
+    }
+    return false;
+}
 
-}*/
+bool sudoku::solve(string grid) {
+    parse_grid(grid);
+    return search(solution);
+}
