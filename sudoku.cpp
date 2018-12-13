@@ -385,7 +385,6 @@ bool sudoku::search(map<string, string> &values) {
             }
         }
     }
-    values["A1"] = "false";
     return false;
 }
 
