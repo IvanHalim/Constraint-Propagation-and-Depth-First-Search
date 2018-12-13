@@ -21,6 +21,7 @@ class sudoku {
         vector<vector<string> >                 unitlist;
         map<string, vector<vector<string> > >   units;
         map<string, set<string> >               peers;
+        map<string, string>                     input;
         map<string, string>                     solution;
 
         //Helper functions
@@ -31,6 +32,7 @@ class sudoku {
     public:
         sudoku();
         bool                    parse_grid(string);
+        void                    display_input();
         void                    display_solution();
 };
 #endif

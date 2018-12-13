@@ -168,6 +168,10 @@ sudoku::sudoku() {
     }
 
     for (int i = 0; i < squares.size(); i++) {
+        input[squares[i]] = ".";
+    }
+
+    for (int i = 0; i < squares.size(); i++) {
         solution[squares[i]] = digits;
     }
 }
@@ -181,8 +185,10 @@ sudoku::sudoku() {
 map<string, string> sudoku::grid_values(string grid) {
     vector<string> chars;
     for (int i = 0; i < grid.length(); i++) {
-        if (string_contains(digits, grid.substr(i, 1)) || string_contains("0.", grid.substr(i, 1))) {
+        if (string_contains(digits, grid.substr(i, 1))) {
             chars.push_back(grid.substr(i, 1));
+        } else if (string_contains("0.", grid.substr(i, 1))) {
+            chars.push_back(".");
         }
     }
     assert(chars.size() == squares.size());
@@ -205,8 +211,8 @@ bool sudoku::parse_grid(string grid) {
     for (int i = 0; i < squares.size(); i++) {
         solution[squares[i]] = digits;
     }
-    map<string, string> grid_val = grid_values(grid);
-    for (map<string, string>::iterator i = grid_val.begin(); i != grid_val.end(); i++) {
+    input = grid_values(grid);
+    for (map<string, string>::iterator i = input.begin(); i != input.end(); i++) {
         if (string_contains(digits, i->second) && !assign(solution, i->first, i->second)) {
             solution["A1"] = "false";
             return false;
@@ -319,6 +325,10 @@ void sudoku::display(map<string, string> values) {
             cout << line << endl;
         }
     }
+}
+
+void sudoku::display_input() {
+    display(input);
 }
 
 void sudoku::display_solution() {
