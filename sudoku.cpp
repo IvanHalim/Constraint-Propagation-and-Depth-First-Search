@@ -376,11 +376,11 @@ bool sudoku::search(map<string, string> &values) {
         return true;
     }
     string min_square = find_min_possibilities(values);
+    map<string, string> copy = make_copy(values);
     for (int i = 0; i < values[min_square].length(); i++) {
-        map<string, string> copy = make_copy(values);
-        if(assign(copy, min_square, values[min_square].substr(i, 1))) {
-            if (search(copy)) {
-                assign(values, min_square, values[min_square].substr(i, 1));
+        values = copy;
+        if (assign(values, min_square, values[min_square].substr(i, 1))) {
+            if (search(values)) {
                 return true;
             }
         }
