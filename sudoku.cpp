@@ -380,12 +380,12 @@ bool sudoku::search(map<string, string> &values) {
     cout << min_square << endl;
     map<string, string> copy = make_copy(values);
     for (int i = 0; i < values[min_square].length(); i++) {
-        values = copy;
         if (assign(values, min_square, values[min_square].substr(i, 1))) {
             if (search(values)) {
                 return true;
             }
         }
+        values = copy;
     }
     return false;
 }
