@@ -108,14 +108,6 @@ bool solved(map<string, string> values) {
     return true;
 }
 
-map<string, string> make_copy(map<string, string> values) {
-    map<string, string> copy;
-    for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
-        copy[i->first] = i->second;
-    }
-    return copy;
-}
-
 sudoku::sudoku() {
     digits = "123456789";
     rows = "ABCDEFGHI";
@@ -390,5 +382,9 @@ bool sudoku::search(map<string, string> &values) {
 
 bool sudoku::solve(string grid) {
     parse_grid(grid);
-    return search(solution);
+    if (!search(solution)) {
+        solution["A1"] = "false";
+        return false;
+    }
+    return true;
 }
