@@ -380,7 +380,7 @@ bool sudoku::search(map<string, string> &values) {
         map<string, string> copy = make_copy(values);
         if(assign(copy, min_square, values[min_square].substr(i, 1))) {
             if (search(copy)) {
-                values[min_square] = values[min_square].substr(i, 1);
+                assign(values, min_square, values[min_square].substr(i, 1));
                 return true;
             }
         }
@@ -391,6 +391,5 @@ bool sudoku::search(map<string, string> &values) {
 
 bool sudoku::solve(string grid) {
     parse_grid(grid);
-    display_solution();
     return search(solution);
 }
