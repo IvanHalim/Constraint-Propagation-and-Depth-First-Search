@@ -205,6 +205,8 @@ sudoku::sudoku() {
 }
 
 /*
+ * This function converts a string of values into a sudoku board
+ *
  * def grid_values(grid):
  *     chars = [c for c in grid if c in digits or c in '0.']
  *     assert len(chars) == 81
@@ -228,6 +230,11 @@ map<string, string> sudoku::grid_values(string grid) {
 }
 
 /*
+ * This function uses constraint propagation to compute all the possible numbers
+ * in each square based on the initial input. You may think of 'propagation' as
+ * a sort of chain reaction or a ripple effect where assigning or eliminating a number
+ * may lead to the elimination of many other numbers because of the constraints.
+ *
  * def parse_grid(grid):
  *     values = dict((s, digits) for s in squares)
  *     for s,d in grid_values(grid).items():
@@ -250,6 +257,9 @@ bool sudoku::parse_grid(string grid) {
 }
 
 /*
+ * A function to assign a number to a square in the sudoku board
+ * Assigning a number is equivalent to eliminating all the other possible numbers
+ *
  * def assign(values, s, d):
  *     other_values = values[s].replace(d, '')
  *     if all(eliminate(values, s, d2) for d2 in other_values):
@@ -365,6 +375,9 @@ void sudoku::display_solution() {
 }
 
 /*
+ * After some values have been eliminated, if there are still unsolved squares,
+ * use a trial-and-error algorithm to solve the remaining squares
+ *
  * def search(values):
  *     if values is False:
  *         return False
