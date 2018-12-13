@@ -30,9 +30,9 @@ class sudoku {
         bool                    eliminate(map<string, string>&, string, string);
         void                    display(map<string, string>);
         bool                    search(map<string, string>&);
+        bool                    parse_grid(string);
     public:
         sudoku();
-        bool                    parse_grid(string);
         bool                    solve(string);
         void                    display_input();
         void                    display_solution();
