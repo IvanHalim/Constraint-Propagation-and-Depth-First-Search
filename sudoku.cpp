@@ -85,6 +85,15 @@ int find_max_length(map<string, string> values) {
     return max_length;
 }
 
+bool solved(map<string, string> values) {
+    for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
+        if ((i->second).length() != 1) {
+            return false;
+        }
+    }
+    return true;
+}
+
 sudoku::sudoku() {
     digits = "123456789";
     rows = "ABCDEFGHI";
@@ -157,6 +166,10 @@ sudoku::sudoku() {
         }
         peers[squares[i]].erase(squares[i]);
     }
+
+    for (int i = 0; i < squares.size(); i++) {
+        solution[squares[i]] = digits;
+    }
 }
 
 /*
@@ -188,18 +201,18 @@ map<string, string> sudoku::grid_values(string grid) {
  *             return False ## (Fail if we can't assign d to square s.)
  *     return values
  */
-map<string, string> sudoku::parse_grid(string grid) {
-    map<string, string> values;
+bool sudoku::parse_grid(string grid) {
     for (int i = 0; i < squares.size(); i++) {
-        values[squares[i]] = digits;
+        solution[squares[i]] = digits;
     }
     map<string, string> grid_val = grid_values(grid);
     for (map<string, string>::iterator i = grid_val.begin(); i != grid_val.end(); i++) {
-        if (string_contains(digits, i->second) && !assign(values, i->first, i->second)) {
-            values["A1"] = "false";
+        if (string_contains(digits, i->second) && !assign(solution, i->first, i->second)) {
+            solution["A1"] = "false";
+            return false;
         }
     }
-    return values;
+    return true;
 }
 
 /*
@@ -307,3 +320,27 @@ void sudoku::display(map<string, string> values) {
         }
     }
 }
+
+void sudoku::display_solution() {
+    display(solution);
+}
+
+/*
+ * def search(values):
+ *     if values is False:
+ *         return False
+ *     if all(len(values[s]) == 1 for s in squares):
+ *         return values
+ *     ## Chose the unfilled square s with the fewest possibilities
+ *     n,s = min((len(values[s]), s) for s in squares if len(values[s]) > 1)
+ *     return some(search(assign(values.copy(), s, d))
+ *                for d in values[s])
+ */
+/*bool sudoku::search(map<string, string> values) {
+    if (values["A1"] == "false") {
+        return false;
+    } else if (solved(values)) {
+        return true;
+    }
+
+}*/

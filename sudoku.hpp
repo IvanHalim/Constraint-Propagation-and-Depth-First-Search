@@ -21,14 +21,16 @@ class sudoku {
         vector<vector<string> >                 unitlist;
         map<string, vector<vector<string> > >   units;
         map<string, set<string> >               peers;
+        map<string, string>                     solution;
 
         //Helper functions
         map<string, string>     grid_values(string);
         bool                    assign(map<string, string>&, string, string);
         bool                    eliminate(map<string, string>&, string, string);
+        void                    display(map<string, string>);
     public:
         sudoku();
-        map<string, string>     parse_grid(string);
-        void                    display(map<string, string>);
+        bool                    parse_grid(string);
+        void                    display_solution();
 };
 #endif
