@@ -364,7 +364,8 @@ void sudoku::display_solution() {
 bool sudoku::search(map<string, string> &values) {
     if (values["A1"] == "false") {
         return false;
-    } else if (solved(values)) {
+    }
+    if (solved(values)) {
         return true;
     }
     string min_square = find_min_possibilities(values);
