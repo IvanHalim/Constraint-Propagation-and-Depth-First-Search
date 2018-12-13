@@ -29,7 +29,7 @@ vector<string> cross(string A, string B) {
 }
 
 /*
- * A utility function to check whether a string vector contains a particular string
+ * A helper function to check whether a string vector contains a particular string
  */
 bool vector_contains(vector<string> u, string s) {
     for (int i = 0; i < u.size(); i++) {
@@ -41,7 +41,7 @@ bool vector_contains(vector<string> u, string s) {
 }
 
 /*
- * A utility function to check whether a string contains a particular substring
+ * A helper function to check whether a string contains a particular substring
  */
 bool string_contains(string str, string substring) {
     if (str.find(substring) != string::npos) {
@@ -52,7 +52,7 @@ bool string_contains(string str, string substring) {
 }
 
 /*
- * A utility function to erase a substring from a string
+ * A helper function to erase a substring from a string
  */
 string string_eliminate(string str, string substring) {
     string::size_type position = str.find(substring);
@@ -63,6 +63,9 @@ string string_eliminate(string str, string substring) {
     }
 }
 
+/*
+ * A helper function to center a string inside a given width
+ */
 string center_string(string str, int width) {
     int leading_spaces = (width - str.length()) / 2;
     int trailing_spaces = width - str.length() - leading_spaces;
@@ -77,6 +80,9 @@ string center_string(string str, int width) {
     return centered;
 }
 
+/*
+ * A helper function to find the maximum length of the values in the grid
+ */
 int find_max_length(map<string, string> values) {
     int max_length = 0;
     for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
@@ -87,6 +93,9 @@ int find_max_length(map<string, string> values) {
     return max_length;
 }
 
+/*
+ * A helper function to find the square with the minimum number of possibilities
+ */
 string find_min_possibilities(map<string, string> values) {
     int min_length = 10;
     string min_square;
@@ -99,6 +108,9 @@ string find_min_possibilities(map<string, string> values) {
     return min_square;
 }
 
+/*
+ * A helper function to check if a grid is solved
+ */
 bool solved(map<string, string> values) {
     for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
         if ((i->second).length() != 1) {
@@ -181,10 +193,12 @@ sudoku::sudoku() {
         peers[squares[i]].erase(squares[i]);
     }
 
+    // Since there is no input, initialize an empty grid
     for (int i = 0; i < squares.size(); i++) {
         input[squares[i]] = ".";
     }
 
+    // If the grid is empty then each square can be any number from 1 to 9
     for (int i = 0; i < squares.size(); i++) {
         solution[squares[i]] = digits;
     }
