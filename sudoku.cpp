@@ -124,6 +124,69 @@ bool solved(map<string, string> values) {
     return true;
 }
 
+/*
+ * This function displays the values in a hash map as a sudoku grid
+ *
+ * def display(values):
+ *     width = 1+max(len(values[s]) for s in squares)
+ *     line = '+'.join(['-'*(width*3)]*3)
+ *     for r in rows:
+ *         print ''.join(values[r+c].center(width)+('|' if c in '36' else '') for c in cols)
+ *         if r in 'CF':
+ *             print line
+ *     print
+ */
+void sudoku::display(map<string, string> values) {
+    int width = 1 + find_max_length(values);
+    string line;
+    for (int i = 0; i < rows.length(); i++) {
+        for (int j = 0; j < width; j++) {
+            line += "-";
+        }
+        if (i+1 == 3 || i+1 == 6) {
+            line += "+";
+        }
+    }
+    for (int i = 0; i < rows.length(); i++) {
+        for (int j = 0; j < cols.length(); j++) {
+            cout << center_string(values[squares[i*9+j]], width);
+            if (j+1 == 3 || j+1 == 6) {
+                cout << "|";
+            }
+        }
+        cout << endl;
+        if (i+1 == 3 || i+1 == 6) {
+            cout << line << endl;
+        }
+    }
+}
+
+/*
+ * This function converts a string of values into a map of {square: char}
+ * with '0' or '.' for empties.
+ *
+ * def grid_values(grid):
+ *     chars = [c for c in grid if c in digits or c in '0.']
+ *     assert len(chars) == 81
+ *     return dict(zip(squares, chars))
+ */
+map<string, string> sudoku::grid_values(string grid) {
+    vector<string> chars;
+    for (int i = 0; i < grid.length(); i++) {
+        if (string_contains(digits, grid.substr(i, 1))) {
+            chars.push_back(grid.substr(i, 1));
+        } else if (string_contains("0.", grid.substr(i, 1))) {
+            chars.push_back(".");
+        }
+    }
+    assert(chars.size() == squares.size());
+    map<string, string> grid_val;
+    for (int i = 0; i < squares.size(); i++) {
+        grid_val[squares[i]] = chars[i];
+    }
+    return grid_val;
+}
+
 /***************************************************************************************
                             INITIALIZATION OF MEMBER VARIABLES
 ***************************************************************************************/
@@ -210,31 +273,6 @@ sudoku::sudoku() {
     for (int i = 0; i < squares.size(); i++) {
         solution[squares[i]] = digits;
     }
-}
-
-/*
- * This function converts a string of values into a sudoku board
- *
- * def grid_values(grid):
- *     chars = [c for c in grid if c in digits or c in '0.']
- *     assert len(chars) == 81
- *     return dict(zip(squares, chars))
- */
-map<string, string> sudoku::grid_values(string grid) {
-    vector<string> chars;
-    for (int i = 0; i < grid.length(); i++) {
-        if (string_contains(digits, grid.substr(i, 1))) {
-            chars.push_back(grid.substr(i, 1));
-        } else if (string_contains("0.", grid.substr(i, 1))) {
-            chars.push_back(".");
-        }
-    }
-    assert(chars.size() == squares.size());
-    map<string, string> grid_val;
-    for (int i = 0; i < squares.size(); i++) {
-        grid_val[squares[i]] = chars[i];
-    }
-    return grid_val;
 }
 
 /***************************************************************************************
@@ -393,41 +431,6 @@ bool sudoku::solve(string grid) {
 /***************************************************************************************
                                 ADDITIONAL FUNCTIONS
 ***************************************************************************************/
-
-/*
- * def display(values):
- *     width = 1+max(len(values[s]) for s in squares)
- *     line = '+'.join(['-'*(width*3)]*3)
- *     for r in rows:
- *         print ''.join(values[r+c].center(width)+('|' if c in '36' else '') for c in cols)
- *         if r in 'CF':
- *             print line
- *     print
- */
-void sudoku::display(map<string, string> values) {
-    int width = 1 + find_max_length(values);
-    string line;
-    for (int i = 0; i < rows.length(); i++) {
-        for (int j = 0; j < width; j++) {
-            line += "-";
-        }
-        if (i+1 == 3 || i+1 == 6) {
-            line += "+";
-        }
-    }
-    for (int i = 0; i < rows.length(); i++) {
-        for (int j = 0; j < cols.length(); j++) {
-            cout << center_string(values[squares[i*9+j]], width);
-            if (j+1 == 3 || j+1 == 6) {
-                cout << "|";
-            }
-        }
-        cout << endl;
-        if (i+1 == 3 || i+1 == 6) {
-            cout << line << endl;
-        }
-    }
-}
 
 void sudoku::display_input() {
     display(input);
