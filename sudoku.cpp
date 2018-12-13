@@ -124,6 +124,10 @@ bool solved(map<string, string> values) {
     return true;
 }
 
+/***************************************************************************************
+                            INITIALIZATION OF MEMBER VARIABLES
+***************************************************************************************/
+
 sudoku::sudoku() {
     digits = "123456789";
     rows = "ABCDEFGHI";
