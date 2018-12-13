@@ -375,7 +375,9 @@ bool sudoku::search(map<string, string> &values) {
     } else if (solved(values)) {
         return true;
     }
+    display_solution();
     string min_square = find_min_possibilities(values);
+    cout << min_square << endl;
     map<string, string> copy = make_copy(values);
     for (int i = 0; i < values[min_square].length(); i++) {
         values = copy;
