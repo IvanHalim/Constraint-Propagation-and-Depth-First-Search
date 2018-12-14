@@ -138,6 +138,10 @@ bool solved(map<string, string> values) {
  *     print
  */
 void sudoku::display(map<string, string> values) {
+    if (values["A1"] == "false") {
+        cout << "**NO SOLUTION IS FOUND**" << endl;
+        return;
+    }
     int width = 1 + find_max_length(values);
     string line;
     for (int i = 0; i < rows.length(); i++) {
