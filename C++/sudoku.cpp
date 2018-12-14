@@ -413,8 +413,9 @@ bool sudoku::eliminate(map<string, string> &values, string s, string d) {
  *         return values ## Solved!
  *     ## Chose the unfilled square s with the fewest possibilities
  *     n,s = min((len(values[s]), s) for s in squares if len(values[s]) > 1)
- *     return some(search(assign(values.copy(), s, d))
- *                for d in values[s])
+ *     for d in values[s]:
+ *         result = search(assign(values.copy(), s, d))
+ *         if result: return result
  */
 bool sudoku::search(map<string, string> &values) {
     if (values["A1"] == "false") {
