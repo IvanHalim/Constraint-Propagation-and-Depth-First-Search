@@ -125,6 +125,22 @@ bool solved(map<string, string> values) {
 }
 
 /*
+ * A helper function to create a line given a single column width
+ */
+string create_line(int width) {
+    string line;
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < width; j++) {
+            line += "-";
+        }
+        if (i+1 == 3 || i+1 == 6) {
+            line += "+";
+        }
+    }
+    return line;
+}
+
+/*
  * This function displays the values in a hash map as a sudoku grid
  *
  * def display(values):
@@ -143,15 +159,7 @@ void sudoku::display(map<string, string> values) {
         return;
     }
     int width = 1 + find_max_length(values);
-    string line;
-    for (int i = 0; i < rows.length(); i++) {
-        for (int j = 0; j < width; j++) {
-            line += "-";
-        }
-        if (i+1 == 3 || i+1 == 6) {
-            line += "+";
-        }
-    }
+    string line = create_line(width);
     for (int i = 0; i < rows.length(); i++) {
         for (int j = 0; j < cols.length(); j++) {
             cout << center_string(values[squares[i*9+j]], width);
