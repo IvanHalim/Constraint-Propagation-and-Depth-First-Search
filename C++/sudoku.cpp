@@ -125,7 +125,8 @@ bool solved(map<string, string> values) {
 }
 
 /*
- * A helper function to create a line given a single column width
+ * A helper function to create a horizontal line on a sudoku grid
+ * given a single column width
  */
 string create_line(int width) {
     string line;
