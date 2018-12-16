@@ -22,6 +22,7 @@ class sudoku {
         map<string, vector<vector<string> > >   units;
         map<string, set<string> >               peers;
         map<string, string>                     input;
+        map<string, string>                     parsed_grid;
         map<string, string>                     solution;
 
         //Helper functions
@@ -30,11 +31,12 @@ class sudoku {
         bool                    eliminate(map<string, string>&, string, string);
         void                    display(map<string, string>);
         bool                    search(map<string, string>&);
+        bool                    parse_grid(string);
     public:
         sudoku();
         bool                    solve(string);
-        bool                    parse_grid(string);
         void                    display_input();
+        void                    display_parsed_grid();
         void                    display_solution();
         map<string, string>     get_solution();
 };

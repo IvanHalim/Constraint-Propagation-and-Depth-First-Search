@@ -173,6 +173,7 @@ void sudoku::display(map<string, string> values) {
             cout << line << endl;
         }
     }
+    cout << endl;
 }
 
 /*
@@ -288,6 +289,8 @@ sudoku::sudoku() {
     for (int i = 0; i < squares.size(); i++) {
         solution[squares[i]] = digits;
     }
+
+    parsed_grid = solution;
 }
 
 /***************************************************************************************
@@ -318,9 +321,11 @@ bool sudoku::parse_grid(string grid) {
     for (map<string, string>::iterator i = input.begin(); i != input.end(); i++) {
         if (string_contains(digits, i->second) && !assign(solution, i->first, i->second)) {
             solution["A1"] = "false";
+            parsed_grid = solution;
             return false;
         }
     }
+    parsed_grid = solution;
     return true;
 }
 
@@ -461,6 +466,10 @@ bool sudoku::solve(string grid) {
 
 void sudoku::display_input() {
     display(input);
+}
+
+void sudoku::display_parsed_grid() {
+    display(parsed_grid);
 }
 
 void sudoku::display_solution() {
