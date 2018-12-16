@@ -26,5 +26,6 @@ int main() {
     mySudoku.display_solution();
     cout << endl;
 
+    system("pause");
     return 0;
 }

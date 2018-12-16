@@ -134,7 +134,7 @@ string create_line(int width) {
         for (int j = 0; j < width; j++) {
             line += "-";
         }
-        if (i+1 == 3 || i+1 == 6) {
+        if (i == 2 || i == 5) {
             line += "+";
         }
     }
@@ -169,7 +169,7 @@ void sudoku::display(map<string, string> values) {
             }
         }
         cout << endl;
-        if (i+1 == 3 || i+1 == 6) {
+        if (i == 2 || i == 5) {
             cout << line << endl;
         }
     }
