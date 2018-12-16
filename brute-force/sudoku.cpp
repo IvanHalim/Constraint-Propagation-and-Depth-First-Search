@@ -125,7 +125,7 @@ void parse_grid(int sudoku[9][9], string grid) {
 
 int main() {
     int sudoku[9][9];
-    string grid = "800000000003600000070090200050007000000045700000100030001000068008500010090000400";
+    string grid = "000000000000003085001020000000507000004000100090000000500000073002010000000040009";
     parse_grid(sudoku, grid);
     solve(sudoku, create_coordinate(0, 0));
     print(sudoku);
