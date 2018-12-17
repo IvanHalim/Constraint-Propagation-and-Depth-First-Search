@@ -164,7 +164,7 @@ void sudoku::display(map<string, string> values) {
     for (int i = 0; i < rows.length(); i++) {
         for (int j = 0; j < cols.length(); j++) {
             cout << center_string(values[squares[i*9+j]], width);
-            if (j+1 == 3 || j+1 == 6) {
+            if (j == 2 || j == 5) {
                 cout << "|";
             }
         }
