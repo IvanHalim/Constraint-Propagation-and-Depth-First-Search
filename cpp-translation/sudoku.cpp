@@ -5,6 +5,7 @@
 #include <set>
 #include <iterator>
 #include <cassert>
+#include <cmath>
 #include "sudoku.hpp"
 
 using std::cout;
@@ -128,13 +129,13 @@ bool solved(map<string, string> values) {
  * A helper function to create a horizontal line on a sudoku grid
  * given a single column width
  */
-string create_line(int width) {
+string create_line(int width, int size) {
     string line;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < pow(size, 2); i++) {
         for (int j = 0; j < width; j++) {
             line += "-";
         }
-        if (i == 2 || i == 5) {
+        if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
             line += "+";
         }
     }
@@ -160,16 +161,16 @@ void sudoku::display(map<string, string> values) {
         return;
     }
     int width = 1 + find_max_length(values);
-    string line = create_line(width);
+    string line = create_line(width, size);
     for (int i = 0; i < rows.length(); i++) {
         for (int j = 0; j < cols.length(); j++) {
             cout << center_string(values[squares[i*9+j]], width);
-            if (j == 2 || j == 5) {
+            if ((j + 1) % size == 0 && (j + 1) < pow(size, 2)) {
                 cout << "|";
             }
         }
         cout << endl;
-        if (i == 2 || i == 5) {
+        if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
             cout << line << endl;
         }
     }
@@ -208,6 +209,7 @@ map<string, string> sudoku::grid_values(string grid) {
 ***************************************************************************************/
 
 sudoku::sudoku() {
+    size = 3;
     digits = "123456789";
     rows = "ABCDEFGHI";
     cols = digits;
@@ -228,8 +230,8 @@ sudoku::sudoku() {
     for (int i = 0; i < digits.length(); i++) {
         unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             unitlist.push_back(cross(rows_threes[i], cols_threes[j]));
         }
     }
@@ -474,6 +476,14 @@ void sudoku::display_parsed_grid() {
 
 void sudoku::display_solution() {
     display(solution);
+}
+
+map<string, string> sudoku::get_input() {
+    return input;
+}
+
+map<string, string> sudoku::get_parsed_grid() {
+    return parsed_grid;
 }
 
 map<string, string> sudoku::get_solution() {

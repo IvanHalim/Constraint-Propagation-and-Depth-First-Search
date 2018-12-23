@@ -14,6 +14,7 @@ using std::set;
 class sudoku {
     private:
         //Variables
+        int                                     size;
         string                                  digits;
         string                                  rows;
         string                                  cols;
@@ -27,17 +28,19 @@ class sudoku {
 
         //Helper functions
         map<string, string>     grid_values(string);
+        bool                    parse_grid(string);
         bool                    assign(map<string, string>&, string, string);
         bool                    eliminate(map<string, string>&, string, string);
         void                    display(map<string, string>);
         bool                    search(map<string, string>&);
-        bool                    parse_grid(string);
     public:
         sudoku();
         bool                    solve(string);
         void                    display_input();
         void                    display_parsed_grid();
         void                    display_solution();
+        map<string, string>     get_input();
+        map<string, string>     get_parsed_grid();
         map<string, string>     get_solution();
 };
 #endif
