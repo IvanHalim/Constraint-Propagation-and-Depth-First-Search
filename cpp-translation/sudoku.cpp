@@ -157,7 +157,7 @@ string create_line(int width, int size) {
  */
 void sudoku::display(map<string, string> values) {
     if (values["A1"] == "false") {
-        cout << "**NO SOLUTION IS FOUND**" << endl;
+        cout << "**NO SOLUTION IS FOUND**" << endl << endl;
         return;
     }
     int width = 1 + find_max_length(values);
