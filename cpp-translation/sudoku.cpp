@@ -36,9 +36,9 @@ vector<string> cross(string A, string B) {
 /*
  * A helper function to check whether a string vector contains a particular string
  */
-bool vector_contains(vector<string> u, string s) {
-    for (int i = 0; i < u.size(); i++) {
-        if (u[i] == s) {
+bool vector_contains(vector<string> vec, string s) {
+    for (int i = 0; i < vec.size(); i++) {
+        if (vec[i] == s) {
             return true;
         }
     }
