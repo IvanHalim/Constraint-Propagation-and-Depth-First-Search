@@ -216,14 +216,23 @@ sudoku::sudoku() {
     squares = cross(rows, cols);
 
     /*
+     * string rows_threes[3] = {"ABC", "DEF", "GHI"};
+     * string cols_threes[3] = {"123", "456", "789"};
+     */
+    vector<string> rows_threes;
+    vector<string> cols_threes;
+    for (int i = 0; i < pow(size, 2); i += size) {
+        rows_threes.push_back(rows.substr(i, size));
+        cols_threes.push_back(cols.substr(i, size));
+    }
+
+    /*
      * Creating vector<vector<string> > unitlist:
      *
      * unitlist = ([cross(rows, c) for c in cols] +
      *             [cross(r, cols) for r in rows] +
      *             [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
      */
-    string rows_threes[3] = {"ABC", "DEF", "GHI"};
-    string cols_threes[3] = {"123", "456", "789"};
     for (int i = 0; i < rows.length(); i++) {
         unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
