@@ -31,7 +31,7 @@ class sudoku {
         bool                    parse_grid(string);
         bool                    assign(map<string, string>&, string, string);
         bool                    eliminate(map<string, string>&, string, string);
-        void                    display(map<string, string>);
+        void                    display(map<string, string>&);
         bool                    search(map<string, string>&);
     public:
         sudoku();

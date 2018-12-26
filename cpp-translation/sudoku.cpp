@@ -36,7 +36,7 @@ vector<string> cross(string A, string B) {
 /*
  * A helper function to check whether a string vector contains a particular string
  */
-bool vector_contains(vector<string> vec, string s) {
+bool vector_contains(const vector<string> &vec, string s) {
     for (int i = 0; i < vec.size(); i++) {
         if (vec[i] == s) {
             return true;
@@ -88,9 +88,9 @@ string center_string(string str, int width) {
 /*
  * A helper function to find the maximum length of the values in the grid
  */
-int find_max_length(map<string, string> values) {
+int find_max_length(const map<string, string> &values) {
     int max_length = 0;
-    for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
+    for (map<string, string>::const_iterator i = values.begin(); i != values.end(); i++) {
         if ((i->second).length() > max_length) {
             max_length = (i->second).length();
         }
@@ -101,10 +101,10 @@ int find_max_length(map<string, string> values) {
 /*
  * A helper function to find the square with the minimum number of possibilities
  */
-string find_min_possibilities(map<string, string> values) {
+string find_min_possibilities(const map<string, string> &values) {
     int min_length = 10;
     string min_square;
-    for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
+    for (map<string, string>::const_iterator i = values.begin(); i != values.end(); i++) {
         if ((i->second).length() < min_length && (i->second).length() > 1) {
             min_length = (i->second).length();
             min_square = i->first;
@@ -116,8 +116,8 @@ string find_min_possibilities(map<string, string> values) {
 /*
  * A helper function to check if a grid is solved
  */
-bool solved(map<string, string> values) {
-    for (map<string, string>::iterator i = values.begin(); i != values.end(); i++) {
+bool solved(const map<string, string> &values) {
+    for (map<string, string>::const_iterator i = values.begin(); i != values.end(); i++) {
         if ((i->second).length() != 1) {
             return false;
         }
@@ -155,7 +155,7 @@ string create_line(int width, int size) {
  *             print line
  *     print
  */
-void sudoku::display(map<string, string> values) {
+void sudoku::display(map<string, string> &values) {
     if (values["A1"] == "false") {
         cout << "**NO SOLUTION IS FOUND**" << endl << endl;
         return;
