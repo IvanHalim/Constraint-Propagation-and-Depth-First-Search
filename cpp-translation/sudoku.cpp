@@ -48,7 +48,7 @@ bool vector_contains(const vector<string> &vec, string s) {
 /*
  * A helper function to check whether a string contains a particular substring
  */
-bool string_contains(string str, string substring) {
+bool string_contains(const string &str, string substring) {
     if (str.find(substring) != string::npos) {
         return true;
     } else {
