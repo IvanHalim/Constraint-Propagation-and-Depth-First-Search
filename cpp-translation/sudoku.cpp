@@ -24,13 +24,13 @@ using std::set;
  *     return [a+b for a in A for b in B]
  */
 vector<string> cross(string A, string B) {
-    vector<string> str;
+    vector<string> cross;
     for (int i = 0; i < A.length(); i++) {
         for (int j = 0; j < B.length(); j++) {
-            str.push_back(A.substr(i, 1) + B.substr(j, 1));
+            cross.push_back(A.substr(i, 1) + B.substr(j, 1));
         }
     }
-    return str;
+    return cross;
 }
 
 /*
