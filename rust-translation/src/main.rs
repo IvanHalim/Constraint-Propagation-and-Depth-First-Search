@@ -1,6 +1,5 @@
 use std::collections::{HashMap};
 
-
 #[derive(Debug)]
 struct Sudoku {
     cols:       Vec<char>,
@@ -24,4 +23,3 @@ fn cross(A: &[char], B: &[char]) -> Vec<String> {
 
     cross
 }
-
