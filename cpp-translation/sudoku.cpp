@@ -71,18 +71,16 @@ string string_eliminate(string str, const string &substring) {
 /*
  * A helper function to center a string inside a given width
  */
-string center_string(const string &str, int width) {
+string center_string(string str, int width) {
     int leading_spaces = (width - str.length()) / 2;
     int trailing_spaces = width - str.length() - leading_spaces;
-    string centered;
     for (int i = 0; i < leading_spaces; i++) {
-        centered += " ";
+        str.insert(0, " ");
     }
-    centered += str;
     for (int i = 0; i < trailing_spaces; i++) {
-        centered += " ";
+        str.append(" ");
     }
-    return centered;
+    return str;
 }
 
 /*
