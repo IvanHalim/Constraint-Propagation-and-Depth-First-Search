@@ -23,7 +23,7 @@ using std::set;
  * def cross(A, B):
  *     return [a+b for a in A for b in B]
  */
-vector<string> cross(string A, string B) {
+vector<string> cross(const string &A, const string &B) {
     vector<string> cross;
     for (int i = 0; i < A.length(); i++) {
         for (int j = 0; j < B.length(); j++) {
@@ -36,7 +36,7 @@ vector<string> cross(string A, string B) {
 /*
  * A helper function to check whether a string vector contains a particular string
  */
-bool vector_contains(const vector<string> &vec, string s) {
+bool vector_contains(const vector<string> &vec, const string &s) {
     for (int i = 0; i < vec.size(); i++) {
         if (vec[i] == s) {
             return true;
@@ -48,7 +48,7 @@ bool vector_contains(const vector<string> &vec, string s) {
 /*
  * A helper function to check whether a string contains a particular substring
  */
-bool string_contains(const string &str, string substring) {
+bool string_contains(const string &str, const string &substring) {
     if (str.find(substring) != string::npos) {
         return true;
     } else {
@@ -59,7 +59,7 @@ bool string_contains(const string &str, string substring) {
 /*
  * A helper function to erase a substring from a string
  */
-string string_eliminate(string str, string substring) {
+string string_eliminate(string str, const string &substring) {
     string::size_type position = str.find(substring);
     if (position == string::npos) {
         return str;
@@ -71,7 +71,7 @@ string string_eliminate(string str, string substring) {
 /*
  * A helper function to center a string inside a given width
  */
-string center_string(string str, int width) {
+string center_string(const string &str, int width) {
     int leading_spaces = (width - str.length()) / 2;
     int trailing_spaces = width - str.length() - leading_spaces;
     string centered;
@@ -187,7 +187,7 @@ void sudoku::display(map<string, string> &values) {
  *     assert len(chars) == 81
  *     return dict(zip(squares, chars))
  */
-map<string, string> sudoku::grid_values(string grid) {
+map<string, string> sudoku::grid_values(const string &grid) {
     vector<string> chars;
     for (int i = 0; i < grid.length(); i++) {
         if (string_contains(digits, grid.substr(i, 1))) {
@@ -324,7 +324,7 @@ sudoku::sudoku() {
  *             return False ## (Fail if we can't assign d to square s.)
  *     return values
  */
-bool sudoku::parse_grid(string grid) {
+bool sudoku::parse_grid(const string &grid) {
     for (int i = 0; i < squares.size(); i++) {
         solution[squares[i]] = digits;
     }
@@ -353,7 +353,7 @@ bool sudoku::parse_grid(string grid) {
  *     else:
  *         return False
  */
-bool sudoku::assign(map<string, string> &values, string s, string d) {
+bool sudoku::assign(map<string, string> &values, const string &s, const string &d) {
     string other_values = string_eliminate(values[s], d);
     for (int i = 0; i < other_values.length(); i++) {
         string d2 = other_values.substr(i, 1);
@@ -389,7 +389,7 @@ bool sudoku::assign(map<string, string> &values, string s, string d) {
  *                 return False
  *     return values
  */
-bool sudoku::eliminate(map<string, string> &values, string s, string d) {
+bool sudoku::eliminate(map<string, string> &values, const string &s, const string &d) {
     if (!string_contains(values[s], d)) {
         return true;
     }
@@ -462,7 +462,7 @@ bool sudoku::search(map<string, string> &values) {
     return false;
 }
 
-bool sudoku::solve(string grid) {
+bool sudoku::solve(const string &grid) {
     parse_grid(grid);
     if (!search(solution)) {
         solution["A1"] = "false";
