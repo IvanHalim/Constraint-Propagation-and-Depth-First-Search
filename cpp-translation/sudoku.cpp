@@ -37,8 +37,8 @@ vector<string> cross(const string &A, const string &B) {
  * A helper function to check whether a string vector contains a particular string
  */
 bool vector_contains(const vector<string> &vec, const string &s) {
-    for (int i = 0; i < vec.size(); i++) {
-        if (vec[i] == s) {
+    for (auto i : vec) {
+        if (i == s) {
             return true;
         }
     }
