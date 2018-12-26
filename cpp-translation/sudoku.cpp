@@ -88,9 +88,9 @@ string center_string(string str, int width) {
  */
 int find_max_length(const map<string, string> &values) {
     int max_length = 0;
-    for (map<string, string>::const_iterator i = values.begin(); i != values.end(); i++) {
-        if ((i->second).length() > max_length) {
-            max_length = (i->second).length();
+    for (auto i : values) {
+        if ((i.second).length() > max_length) {
+            max_length = (i.second).length();
         }
     }
     return max_length;
@@ -102,10 +102,10 @@ int find_max_length(const map<string, string> &values) {
 string find_min_possibilities(const map<string, string> &values) {
     int min_length = 10;
     string min_square;
-    for (map<string, string>::const_iterator i = values.begin(); i != values.end(); i++) {
-        if ((i->second).length() < min_length && (i->second).length() > 1) {
-            min_length = (i->second).length();
-            min_square = i->first;
+    for (auto i : values) {
+        if ((i.second).length() < min_length && (i.second).length() > 1) {
+            min_length = (i.second).length();
+            min_square = i.first;
         }
     }
     return min_square;
@@ -115,8 +115,8 @@ string find_min_possibilities(const map<string, string> &values) {
  * A helper function to check if a grid is solved
  */
 bool solved(const map<string, string> &values) {
-    for (map<string, string>::const_iterator i = values.begin(); i != values.end(); i++) {
-        if ((i->second).length() != 1) {
+    for (auto i : values) {
+        if ((i.second).length() != 1) {
             return false;
         }
     }
@@ -237,9 +237,9 @@ sudoku::sudoku() {
     for (int i = 0; i < digits.length(); i++) {
         unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            unitlist.push_back(cross(rows_threes[i], cols_threes[j]));
+    for (auto i : rows_threes) {
+        for (auto j : cols_threes) {
+            unitlist.push_back(cross(i, j));
         }
     }
 
@@ -257,10 +257,10 @@ sudoku::sudoku() {
      *         if s in u:
      *             units[s].append(u)
      */
-    for (int i = 0; i < squares.size(); i++) {
-        for (int j = 0; j < unitlist.size(); j++) {
-            if (vector_contains(unitlist[j], squares[i])) {
-                units[squares[i]].push_back(unitlist[j]);
+    for (auto i : squares) {
+        for (auto j : unitlist) {
+            if (vector_contains(j, i)) {
+                units[i].push_back(j);
             }
         }
     }
