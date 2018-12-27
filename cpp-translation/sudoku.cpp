@@ -85,8 +85,8 @@ string center_string(string str, size_t width) {
 /*
  * A helper function to find the maximum length of the values in the grid
  */
-size_t find_max_length(const map<string, string> &values) {
-    size_t max_length = 0;
+int find_max_length(const map<string, string> &values) {
+    int max_length = 0;
     for (const auto &i : values) {
         if ((i.second).length() > max_length) {
             max_length = (i.second).length();
@@ -99,7 +99,7 @@ size_t find_max_length(const map<string, string> &values) {
  * A helper function to find the square with the minimum number of possibilities
  */
 string find_min_possibilities(const map<string, string> &values) {
-    size_t min_length = 10;
+    int min_length = 10;
     string min_square;
     for (const auto &i : values) {
         if ((i.second).length() < min_length && (i.second).length() > 1) {
@@ -157,7 +157,7 @@ void sudoku::display(map<string, string> &values) {
         cout << "**NO SOLUTION IS FOUND**" << endl << endl;
         return;
     }
-    size_t width = 1 + find_max_length(values);
+    int width = 1 + find_max_length(values);
     string line = create_line(width, size);
     for (int i = 0; i < rows.length(); i++) {
         for (int j = 0; j < cols.length(); j++) {
