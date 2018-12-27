@@ -1,7 +1,7 @@
 use std::collections::{HashMap};
 
 #[derive(Debug)]
-struct Sudoku {
+struct sudoku {
     cols:       Vec<char>,
     rows:       Vec<char>,
     squares:    Vec<String>,
@@ -20,6 +20,7 @@ fn cross(A: &[char], B: &[char]) -> Vec<String> {
             cross.push(sq)
         }
     }
-
     cross
 }
+
+fn grid_values(grid: &str, )

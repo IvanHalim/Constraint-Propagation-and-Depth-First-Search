@@ -5,16 +5,18 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <cstddef>
 
 using std::string;
 using std::vector;
 using std::map;
 using std::set;
+using std::size_t;
 
 class sudoku {
     private:
         //Variables
-        int                                     size;
+        size_t                                  size;
         string                                  digits;
         string                                  rows;
         string                                  cols;
