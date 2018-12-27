@@ -24,8 +24,8 @@ using std::set;
  */
 vector<string> cross(const string &A, const string &B) {
     vector<string> cross;
-    for (auto a : A) {
-        for (auto b : B) {
+    for (auto const& a : A) {
+        for (auto const& b : B) {
             string sq;
             sq += a;
             sq += b;
@@ -39,7 +39,7 @@ vector<string> cross(const string &A, const string &B) {
  * A helper function to check whether a string vector contains a particular string
  */
 bool vector_contains(const vector<string> &vec, const string &s) {
-    for (auto i : vec) {
+    for (auto const& i : vec) {
         if (i == s) {
             return true;
         }
@@ -90,7 +90,7 @@ string center_string(string str, int width) {
  */
 int find_max_length(const map<string, string> &values) {
     int max_length = 0;
-    for (auto i : values) {
+    for (auto const& i : values) {
         if ((i.second).length() > max_length) {
             max_length = (i.second).length();
         }
@@ -104,7 +104,7 @@ int find_max_length(const map<string, string> &values) {
 string find_min_possibilities(const map<string, string> &values) {
     int min_length = 10;
     string min_square;
-    for (auto i : values) {
+    for (auto const& i : values) {
         if ((i.second).length() < min_length && (i.second).length() > 1) {
             min_length = (i.second).length();
             min_square = i.first;
@@ -117,7 +117,7 @@ string find_min_possibilities(const map<string, string> &values) {
  * A helper function to check if a grid is solved
  */
 bool solved(const map<string, string> &values) {
-    for (auto i : values) {
+    for (auto const& i : values) {
         if ((i.second).length() != 1) {
             return false;
         }
@@ -239,8 +239,8 @@ sudoku::sudoku() {
     for (int i = 0; i < digits.length(); i++) {
         unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
-    for (auto rs : rows_threes) {
-        for (auto cs : cols_threes) {
+    for (auto const& rs : rows_threes) {
+        for (auto const& cs : cols_threes) {
             unitlist.push_back(cross(rs, cs));
         }
     }
@@ -259,8 +259,8 @@ sudoku::sudoku() {
      *         if s in u:
      *             units[s].append(u)
      */
-    for (auto s : squares) {
-        for (auto u : unitlist) {
+    for (auto const& s : squares) {
+        for (auto const& u : unitlist) {
             if (vector_contains(u, s)) {
                 units[s].push_back(u);
             }
@@ -282,9 +282,9 @@ sudoku::sudoku() {
      *             peers[s].add(square)
      *     peers[s].remove(s)
      */
-    for (auto s : squares) {
-        for (auto u : units[s]) {
-            for (auto square : u) {
+    for (auto const& s : squares) {
+        for (auto const& u : units[s]) {
+            for (auto const& square : u) {
                 peers[s].insert(square);
             }
         }
@@ -293,7 +293,7 @@ sudoku::sudoku() {
 
     // Since there is no input, initialize an empty grid
     // If the grid is empty then each square can be any number from 1 to 9
-    for (auto s : squares) {
+    for (auto const& s : squares) {
         input[s] = ".";
         solution[s] = digits;
     }
@@ -322,11 +322,11 @@ sudoku::sudoku() {
  *     return values
  */
 bool sudoku::parse_grid(const string &grid) {
-    for (auto s : squares) {
+    for (auto const& s : squares) {
         solution[s] = digits;
     }
     input = grid_values(grid);
-    for (auto i : input) {
+    for (auto const& i : input) {
         if (string_contains(digits, i.second) && !assign(solution, i.first, i.second)) {
             solution["A1"] = "false";
             parsed_grid = solution;
@@ -395,15 +395,15 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
         return false;
     } else if (values[s].length() == 1) {
         string d2 = values[s];
-        for (auto s2 : peers[s]) {
+        for (auto const& s2 : peers[s]) {
             if (!eliminate(values, s2, d2)) {
                 return false;
             }
         }
     }
-    for (auto u : units[s]) {
+    for (auto const& u : units[s]) {
         vector<string> dplaces;
-        for (auto s : u) {
+        for (auto const& s : u) {
             if (string_contains(values[s], d)) {
                 dplaces.push_back(s);
             }
