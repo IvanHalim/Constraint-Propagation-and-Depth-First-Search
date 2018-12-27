@@ -399,11 +399,11 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
             }
         }
     }
-    for (int i = 0; i < units[s].size(); i++) {
+    for (auto u : units[s]) {
         vector<string> dplaces;
-        for (int j = 0; j < units[s][i].size(); j++) {
-            if (string_contains(values[units[s][i][j]], d)) {
-                dplaces.push_back(units[s][i][j]);
+        for (auto s : u) {
+            if (string_contains(values[s], d)) {
+                dplaces.push_back(s);
             }
         }
         if (dplaces.size() == 0) {
