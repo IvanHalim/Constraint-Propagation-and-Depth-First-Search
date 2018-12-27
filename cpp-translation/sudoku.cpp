@@ -22,7 +22,7 @@ using std::set;
  * def cross(A, B):
  *     return [a+b for a in A for b in B]
  */
-vector<string> cross(const string &A, const string &B) {
+vector<string> cross(string A, string B) {
     vector<string> cross;
     for (auto a : A) {
         for (auto b : B) {
@@ -38,7 +38,7 @@ vector<string> cross(const string &A, const string &B) {
 /*
  * A helper function to check whether a string vector contains a particular string
  */
-bool vector_contains(const vector<string> &vec, const string &s) {
+bool vector_contains(vector<string> vec, string s) {
     for (auto i : vec) {
         if (i == s) {
             return true;
@@ -50,7 +50,7 @@ bool vector_contains(const vector<string> &vec, const string &s) {
 /*
  * A helper function to check whether a string contains a particular substring
  */
-bool string_contains(const string &str, const string &substring) {
+bool string_contains(string str, string substring) {
     if (str.find(substring) != string::npos) {
         return true;
     } else {
@@ -61,7 +61,7 @@ bool string_contains(const string &str, const string &substring) {
 /*
  * A helper function to erase a substring from a string
  */
-string string_eliminate(string str, const string &substring) {
+string string_eliminate(string str, string substring) {
     string::size_type position = str.find(substring);
     if (position == string::npos) {
         return str;
@@ -88,7 +88,7 @@ string center_string(string str, int width) {
 /*
  * A helper function to find the maximum length of the values in the grid
  */
-int find_max_length(const map<string, string> &values) {
+int find_max_length(map<string, string> values) {
     int max_length = 0;
     for (auto i : values) {
         if ((i.second).length() > max_length) {
@@ -101,7 +101,7 @@ int find_max_length(const map<string, string> &values) {
 /*
  * A helper function to find the square with the minimum number of possibilities
  */
-string find_min_possibilities(const map<string, string> &values) {
+string find_min_possibilities(map<string, string> values) {
     int min_length = 10;
     string min_square;
     for (auto i : values) {
@@ -116,7 +116,7 @@ string find_min_possibilities(const map<string, string> &values) {
 /*
  * A helper function to check if a grid is solved
  */
-bool solved(const map<string, string> &values) {
+bool solved(map<string, string> values) {
     for (auto i : values) {
         if ((i.second).length() != 1) {
             return false;
@@ -187,7 +187,7 @@ void sudoku::display(map<string, string> &values) {
  *     assert len(chars) == 81
  *     return dict(zip(squares, chars))
  */
-map<string, string> sudoku::grid_values(const string &grid) {
+map<string, string> sudoku::grid_values(string grid) {
     vector<string> chars;
     for (int i = 0; i < grid.length(); i++) {
         if (string_contains(digits, grid.substr(i, 1))) {
@@ -321,7 +321,7 @@ sudoku::sudoku() {
  *             return False ## (Fail if we can't assign d to square s.)
  *     return values
  */
-bool sudoku::parse_grid(const string &grid) {
+bool sudoku::parse_grid(string grid) {
     for (auto s : squares) {
         solution[s] = digits;
     }
@@ -350,7 +350,7 @@ bool sudoku::parse_grid(const string &grid) {
  *     else:
  *         return False
  */
-bool sudoku::assign(map<string, string> &values, const string &s, const string &d) {
+bool sudoku::assign(map<string, string> &values, string s, string d) {
     string other_values = string_eliminate(values[s], d);
     for (int i = 0; i < other_values.length(); i++) {
         string d2 = other_values.substr(i, 1);
@@ -386,7 +386,7 @@ bool sudoku::assign(map<string, string> &values, const string &s, const string &
  *                 return False
  *     return values
  */
-bool sudoku::eliminate(map<string, string> &values, const string &s, const string &d) {
+bool sudoku::eliminate(map<string, string> &values, string s, string d) {
     if (!string_contains(values[s], d)) {
         return true;
     }
@@ -459,7 +459,7 @@ bool sudoku::search(map<string, string> &values) {
     return false;
 }
 
-bool sudoku::solve(const string &grid) {
+bool sudoku::solve(string grid) {
     parse_grid(grid);
     if (!search(solution)) {
         solution["A1"] = "false";
