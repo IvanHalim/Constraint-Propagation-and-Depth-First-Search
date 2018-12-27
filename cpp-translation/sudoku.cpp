@@ -239,9 +239,9 @@ sudoku::sudoku() {
     for (int i = 0; i < digits.length(); i++) {
         unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
-    for (auto i : rows_threes) {
-        for (auto j : cols_threes) {
-            unitlist.push_back(cross(i, j));
+    for (auto rs : rows_threes) {
+        for (auto cs : cols_threes) {
+            unitlist.push_back(cross(rs, cs));
         }
     }
 
@@ -259,10 +259,10 @@ sudoku::sudoku() {
      *         if s in u:
      *             units[s].append(u)
      */
-    for (auto i : squares) {
-        for (auto j : unitlist) {
-            if (vector_contains(j, i)) {
-                units[i].push_back(j);
+    for (auto s : squares) {
+        for (auto u : unitlist) {
+            if (vector_contains(u, s)) {
+                units[s].push_back(u);
             }
         }
     }
@@ -282,20 +282,20 @@ sudoku::sudoku() {
      *             peers[s].add(square)
      *     peers[s].remove(s)
      */
-    for (auto i : squares) {
-        for (auto j : units[i]) {
-            for (auto k : j) {
-                peers[i].insert(k);
+    for (auto s : squares) {
+        for (auto u : units[s]) {
+            for (auto square : u) {
+                peers[s].insert(square);
             }
         }
-        peers[i].erase(i);
+        peers[s].erase(s);
     }
 
     // Since there is no input, initialize an empty grid
     // If the grid is empty then each square can be any number from 1 to 9
-    for (auto i : squares) {
-        input[i] = ".";
-        solution[i] = digits;
+    for (auto s : squares) {
+        input[s] = ".";
+        solution[s] = digits;
     }
 
     parsed_grid = solution;
@@ -322,8 +322,8 @@ sudoku::sudoku() {
  *     return values
  */
 bool sudoku::parse_grid(const string &grid) {
-    for (auto i : squares) {
-        solution[i] = digits;
+    for (auto s : squares) {
+        solution[s] = digits;
     }
     input = grid_values(grid);
     for (auto i : input) {
