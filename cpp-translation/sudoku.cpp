@@ -24,8 +24,8 @@ using std::set;
  */
 vector<string> cross(const string &A, const string &B) {
     vector<string> cross;
-    for (auto const& a : A) {
-        for (auto const& b : B) {
+    for (auto a : A) {
+        for (auto b : B) {
             string sq;
             sq += a;
             sq += b;
@@ -284,7 +284,7 @@ sudoku::sudoku() {
      */
     for (auto const& s : squares) {
         for (auto const& u : units[s]) {
-            for (auto const& square : u) {
+            for (auto square : u) {
                 peers[s].insert(square);
             }
         }
