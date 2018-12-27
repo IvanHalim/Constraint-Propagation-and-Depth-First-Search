@@ -3,7 +3,6 @@
 #include <vector>
 #include <map>
 #include <set>
-#include <iterator>
 #include <cassert>
 #include <cmath>
 #include "sudoku.hpp"
@@ -396,8 +395,8 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
         return false;
     } else if (values[s].length() == 1) {
         string d2 = values[s];
-        for (set<string>::iterator i = peers[s].begin(); i != peers[s].end(); i++) {
-            if (!eliminate(values, *i, d2)) {
+        for (auto s2 : peers[s]) {
+            if (!eliminate(values, s2, d2)) {
                 return false;
             }
         }
