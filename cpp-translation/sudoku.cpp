@@ -446,10 +446,10 @@ bool sudoku::search(map<string, string> &values) {
     if (solved(values)) {
         return true;
     }
-    string min_square = find_min_possibilities(values);
+    string s = find_min_possibilities(values);
     map<string, string> copy = values;
-    for (int i = 0; i < values[min_square].length(); i++) {
-        if (assign(values, min_square, values[min_square].substr(i, 1))) {
+    for (int i = 0; i < values[s].length(); i++) {
+        if (assign(values, s, values[s].substr(i, 1))) {
             if (search(values)) {
                 return true;
             }
