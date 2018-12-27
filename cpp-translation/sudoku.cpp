@@ -280,23 +280,20 @@ sudoku::sudoku() {
      *             peers[s].add(square)
      *     peers[s].remove(s)
      */
-    for (int i = 0; i < squares.size(); i++) {
-        for (int j = 0; j < units[squares[i]].size(); j++) {
-            for (int k = 0; k < units[squares[i]][j].size(); k++) {
-                peers[squares[i]].insert(units[squares[i]][j][k]);
+    for (auto i : squares) {
+        for (auto j : units[i]) {
+            for (auto k : j) {
+                peers[i].insert(k);
             }
         }
-        peers[squares[i]].erase(squares[i]);
+        peers[i].erase(i);
     }
 
     // Since there is no input, initialize an empty grid
-    for (int i = 0; i < squares.size(); i++) {
-        input[squares[i]] = ".";
-    }
-
     // If the grid is empty then each square can be any number from 1 to 9
-    for (int i = 0; i < squares.size(); i++) {
-        solution[squares[i]] = digits;
+    for (auto i : squares) {
+        input[i] = ".";
+        solution[i] = digits;
     }
 
     parsed_grid = solution;
@@ -323,12 +320,12 @@ sudoku::sudoku() {
  *     return values
  */
 bool sudoku::parse_grid(const string &grid) {
-    for (int i = 0; i < squares.size(); i++) {
-        solution[squares[i]] = digits;
+    for (auto i : squares) {
+        solution[i] = digits;
     }
     input = grid_values(grid);
-    for (map<string, string>::iterator i = input.begin(); i != input.end(); i++) {
-        if (string_contains(digits, i->second) && !assign(solution, i->first, i->second)) {
+    for (auto i : input) {
+        if (string_contains(digits, i.second) && !assign(solution, i.first, i.second)) {
             solution["A1"] = "false";
             parsed_grid = solution;
             return false;
