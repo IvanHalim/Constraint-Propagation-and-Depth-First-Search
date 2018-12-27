@@ -353,8 +353,7 @@ bool sudoku::parse_grid(string grid) {
 bool sudoku::assign(map<string, string> &values, string s, string d) {
     string other_values = string_eliminate(values[s], d);
     for (int i = 0; i < other_values.length(); i++) {
-        string d2 = other_values.substr(i, 1);
-        if (!eliminate(values, s, d2)) {
+        if (!eliminate(values, s, other_values.substr(i, 1))) {
             return false;
         }
     }
@@ -394,9 +393,8 @@ bool sudoku::eliminate(map<string, string> &values, string s, string d) {
     if (values[s].length() == 0) {
         return false;
     } else if (values[s].length() == 1) {
-        string d2 = values[s];
         for (auto s2 : peers[s]) {
-            if (!eliminate(values, s2, d2)) {
+            if (!eliminate(values, s2, values[s])) {
                 return false;
             }
         }
