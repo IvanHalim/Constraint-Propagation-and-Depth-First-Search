@@ -77,10 +77,10 @@ string center_string(string str, int width) {
     int leading_spaces = (width - str.length()) / 2;
     int trailing_spaces = width - str.length() - leading_spaces;
     for (int i = 0; i < leading_spaces; i++) {
-        str.insert(0, " ");
+        str.insert(0, 1, ' ');
     }
     for (int i = 0; i < trailing_spaces; i++) {
-        str.append(" ");
+        str.push_back(' ');
     }
     return str;
 }
@@ -133,10 +133,10 @@ string create_line(int width, int size) {
     string line;
     for (int i = 0; i < pow(size, 2); i++) {
         for (int j = 0; j < width; j++) {
-            line += "-";
+            line += '-';
         }
         if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
-            line += "+";
+            line += '+';
         }
     }
     return line;
