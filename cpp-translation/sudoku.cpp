@@ -13,7 +13,6 @@ using std::string;
 using std::vector;
 using std::map;
 using std::set;
-using std::size_t;
 
 /***************************************************************************************
                                     HELPER FUNCTIONS
@@ -63,7 +62,7 @@ bool string_contains(const string &str, const string &substring) {
  * A helper function to erase a substring from a string
  */
 string string_eliminate(string str, const string &substring) {
-    size_t position = str.find(substring);
+    int position = str.find(substring);
     if (position == string::npos) {
         return str;
     } else {
@@ -74,9 +73,9 @@ string string_eliminate(string str, const string &substring) {
 /*
  * A helper function to center a string inside a given width
  */
-string center_string(string str, size_t width) {
-    size_t leading_spaces = (width - str.length()) / 2;
-    size_t trailing_spaces = width - str.length() - leading_spaces;
+string center_string(string str, int width) {
+    int leading_spaces = (width - str.length()) / 2;
+    int trailing_spaces = width - str.length() - leading_spaces;
     str.insert(0, leading_spaces, ' ');
     str.append(trailing_spaces, ' ');
     return str;
@@ -126,7 +125,7 @@ bool solved(const map<string, string> &values) {
  * A helper function to create a horizontal line on a sudoku grid
  * given a single column width
  */
-string create_line(size_t width, size_t size) {
+string create_line(int width, int size) {
     string line;
     for (int i = 0; i < pow(size, 2); i++) {
         for (int j = 0; j < width; j++) {
