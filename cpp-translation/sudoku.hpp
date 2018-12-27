@@ -27,15 +27,15 @@ class sudoku {
         map<string, string>                     solution;
 
         //Helper functions
-        map<string, string>     grid_values(string);
-        bool                    parse_grid(string);
-        bool                    assign(map<string, string>&, string, string);
-        bool                    eliminate(map<string, string>&, string, string);
-        void                    display(map<string, string>);
+        map<string, string>     grid_values(const string&);
+        bool                    parse_grid(const string&);
+        bool                    assign(map<string, string>&, const string&, const string&);
+        bool                    eliminate(map<string, string>&, const string&, const string&);
+        void                    display(map<string, string>&);
         bool                    search(map<string, string>&);
     public:
         sudoku();
-        bool                    solve(string);
+        bool                    solve(const string&);
         void                    display_input();
         void                    display_parsed_grid();
         void                    display_solution();
