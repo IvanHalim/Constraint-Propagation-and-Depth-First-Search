@@ -25,9 +25,12 @@ using std::set;
  */
 vector<string> cross(const string &A, const string &B) {
     vector<string> cross;
-    for (int i = 0; i < A.length(); i++) {
-        for (int j = 0; j < B.length(); j++) {
-            cross.push_back(A.substr(i, 1) + B.substr(j, 1));
+    for (char a : A) {
+        for (char b : B) {
+            string sq;
+            sq += a;
+            sq += b;
+            cross.push_back(sq);
         }
     }
     return cross;
