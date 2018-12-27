@@ -13,6 +13,7 @@ using std::string;
 using std::vector;
 using std::map;
 using std::set;
+using std::size_t;
 
 /***************************************************************************************
                                     HELPER FUNCTIONS
@@ -62,7 +63,7 @@ bool string_contains(const string &str, const string &substring) {
  * A helper function to erase a substring from a string
  */
 string string_eliminate(string str, const string &substring) {
-    string::size_type position = str.find(substring);
+    size_t position = str.find(substring);
     if (position == string::npos) {
         return str;
     } else {
@@ -73,23 +74,19 @@ string string_eliminate(string str, const string &substring) {
 /*
  * A helper function to center a string inside a given width
  */
-string center_string(string str, int width) {
-    int leading_spaces = (width - str.length()) / 2;
-    int trailing_spaces = width - str.length() - leading_spaces;
-    for (int i = 0; i < leading_spaces; i++) {
-        str.insert(0, 1, ' ');
-    }
-    for (int i = 0; i < trailing_spaces; i++) {
-        str.push_back(' ');
-    }
+string center_string(string str, size_t width) {
+    size_t leading_spaces = (width - str.length()) / 2;
+    size_t trailing_spaces = width - str.length() - leading_spaces;
+    str.insert(0, leading_spaces, ' ');
+    str.append(trailing_spaces, ' ');
     return str;
 }
 
 /*
  * A helper function to find the maximum length of the values in the grid
  */
-int find_max_length(const map<string, string> &values) {
-    int max_length = 0;
+size_t find_max_length(const map<string, string> &values) {
+    size_t max_length = 0;
     for (const auto &i : values) {
         if ((i.second).length() > max_length) {
             max_length = (i.second).length();
@@ -102,7 +99,7 @@ int find_max_length(const map<string, string> &values) {
  * A helper function to find the square with the minimum number of possibilities
  */
 string find_min_possibilities(const map<string, string> &values) {
-    int min_length = 10;
+    size_t min_length = 10;
     string min_square;
     for (const auto &i : values) {
         if ((i.second).length() < min_length && (i.second).length() > 1) {
@@ -129,7 +126,7 @@ bool solved(const map<string, string> &values) {
  * A helper function to create a horizontal line on a sudoku grid
  * given a single column width
  */
-string create_line(int width, int size) {
+string create_line(size_t width, size_t size) {
     string line;
     for (int i = 0; i < pow(size, 2); i++) {
         for (int j = 0; j < width; j++) {
@@ -160,7 +157,7 @@ void sudoku::display(map<string, string> &values) {
         cout << "**NO SOLUTION IS FOUND**" << endl << endl;
         return;
     }
-    int width = 1 + find_max_length(values);
+    size_t width = 1 + find_max_length(values);
     string line = create_line(width, size);
     for (int i = 0; i < rows.length(); i++) {
         for (int j = 0; j < cols.length(); j++) {
