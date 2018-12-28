@@ -68,7 +68,7 @@ bool string_contains(const string &str, const string &substring) {
  * A helper function to erase a substring from a string
  */
 string string_eliminate(string str, const string &substring) {
-    size_t position = str.find(substring);
+    int position = str.find(substring);
     if (position == string::npos) {
         return str;
     } else {
@@ -79,9 +79,9 @@ string string_eliminate(string str, const string &substring) {
 /*
  * A helper function to center a string inside a given width
  */
-string center_string(string str, size_t width) {
-    size_t leading_spaces = (width - str.length()) / 2;
-    size_t trailing_spaces = width - str.length() - leading_spaces;
+string center_string(string str, int width) {
+    int leading_spaces = (width - str.length()) / 2;
+    int trailing_spaces = width - str.length() - leading_spaces;
     str.insert(0, leading_spaces, ' ');
     str.append(trailing_spaces, ' ');
     return str;
@@ -90,8 +90,8 @@ string center_string(string str, size_t width) {
 /*
  * A helper function to find the maximum length of the values in the grid
  */
-size_t find_max_length(const map<string, string> &values) {
-    size_t max_length = 0;
+int find_max_length(const map<string, string> &values) {
+    int max_length = 0;
     for (const auto &i : values) {
         if ((i.second).length() > max_length) {
             max_length = (i.second).length();
@@ -104,7 +104,7 @@ size_t find_max_length(const map<string, string> &values) {
  * A helper function to find the square with the minimum number of possibilities
  */
 string find_min_possibilities(const map<string, string> &values) {
-    size_t min_length = 10;
+    int min_length = 10;
     string min_square;
     for (const auto &i : values) {
         if ((i.second).length() < min_length && (i.second).length() > 1) {
@@ -131,10 +131,10 @@ bool solved(const map<string, string> &values) {
  * A helper function to create a horizontal line on a sudoku grid
  * given a single column width
  */
-string create_line(size_t width, size_t size) {
+string create_line(int width, int size) {
     string line;
-    for (size_t i = 0; i < pow(size, 2); i++) {
-        for (size_t j = 0; j < width; j++) {
+    for (int i = 0; i < pow(size, 2); i++) {
+        for (int j = 0; j < width; j++) {
             line += '-';
         }
         if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
@@ -162,10 +162,10 @@ void sudoku::display(map<string, string> values) {
         cout << "**NO SOLUTION IS FOUND**" << endl << endl;
         return;
     }
-    size_t width = 1 + find_max_length(values);
+    int width = 1 + find_max_length(values);
     string line = create_line(width, size);
-    for (size_t i = 0; i < rows.length(); i++) {
-        for (size_t j = 0; j < cols.length(); j++) {
+    for (int i = 0; i < rows.length(); i++) {
+        for (int j = 0; j < cols.length(); j++) {
             cout << center_string(values[squares[i*pow(size, 2)+j]], width);
             if ((j + 1) % size == 0 && (j + 1) < pow(size, 2)) {
                 cout << "|";
@@ -191,7 +191,7 @@ void sudoku::display(map<string, string> values) {
  */
 map<string, string> sudoku::grid_values(const string &grid) {
     vector<string> chars;
-    for (size_t i = 0; i < grid.length(); i++) {
+    for (int i = 0; i < grid.length(); i++) {
         if (string_contains(digits, grid.substr(i, 1))) {
             chars.push_back(grid.substr(i, 1));
         } else if (string_contains("0.", grid.substr(i, 1))) {
@@ -200,7 +200,7 @@ map<string, string> sudoku::grid_values(const string &grid) {
     }
     assert(chars.size() == squares.size());
     map<string, string> grid_val;
-    for (size_t i = 0; i < squares.size(); i++) {
+    for (int i = 0; i < squares.size(); i++) {
         grid_val[squares[i]] = chars[i];
     }
     return grid_val;
@@ -223,7 +223,7 @@ sudoku::sudoku() {
      */
     vector<string> rows_threes;
     vector<string> cols_threes;
-    for (size_t i = 0; i < pow(size, 2); i += size) {
+    for (int i = 0; i < pow(size, 2); i += size) {
         rows_threes.push_back(rows.substr(i, size));
         cols_threes.push_back(cols.substr(i, size));
     }
@@ -235,10 +235,10 @@ sudoku::sudoku() {
      *             [cross(r, cols) for r in rows] +
      *             [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
      */
-    for (size_t i = 0; i < rows.length(); i++) {
+    for (int i = 0; i < rows.length(); i++) {
         unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
-    for (size_t i = 0; i < digits.length(); i++) {
+    for (int i = 0; i < digits.length(); i++) {
         unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
     for (const auto &rs : rows_threes) {
@@ -354,7 +354,7 @@ bool sudoku::parse_grid(const string &grid) {
  */
 bool sudoku::assign(map<string, string> &values, const string &s, const string &d) {
     string other_values = string_eliminate(values[s], d);
-    for (size_t i = 0; i < other_values.length(); i++) {
+    for (int i = 0; i < other_values.length(); i++) {
         if (!eliminate(values, s, other_values.substr(i, 1))) {
             return false;
         }
@@ -448,7 +448,7 @@ bool sudoku::search(map<string, string> &values) {
     }
     string s = find_min_possibilities(values);
     map<string, string> copy = values;
-    for (size_t i = 0; i < values[s].length(); i++) {
+    for (int i = 0; i < values[s].length(); i++) {
         if (assign(values, s, values[s].substr(i, 1))) {
             if (search(values)) {
                 return true;
@@ -547,7 +547,7 @@ bool sudoku::solved(map<string, string> values) {
     }
 
     set<string> set_digits;
-    for (size_t i = 0; i < digits.length(); i++) {
+    for (int i = 0; i < digits.length(); i++) {
         set_digits.insert(digits.substr(i, 1));
     }
 
