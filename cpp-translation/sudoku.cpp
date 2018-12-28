@@ -487,7 +487,7 @@ void sudoku::test() {
     cout << "All tests pass." << endl;
 }
 
-void sudoku::solve_all(const string &file_name, const string &name, const double &show_if) {
+void sudoku::solve_all(const string &file_name, const string &name, double show_if) {
     string grid;
     vector<bool> results;
     int N, frequency;
@@ -521,7 +521,7 @@ void sudoku::solve_all(const string &file_name, const string &name, const double
             << avg_time << " secs (" << frequency << " Hz), max " << max_time << " secs)." << endl;
 }
 
-void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time, const double &show_if) {
+void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time, double show_if) {
     auto t1 = std::chrono::high_resolution_clock::now();
     solve(grid);
     auto t2 = std::chrono::high_resolution_clock::now();

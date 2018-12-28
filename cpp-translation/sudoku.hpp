@@ -32,13 +32,13 @@ class sudoku {
         bool                    eliminate(map<string, string>&, const string&, const string&);
         void                    display(map<string, string>);
         bool                    search(map<string, string>&);
-        void                    time_solve(const string&, vector<bool>&, double&, double&, const double&);
+        void                    time_solve(const string&, vector<bool>&, double&, double&, double);
         bool                    solved(map<string, string>);
     public:
         sudoku();
         bool                    solve(const string&);
         bool                    parse_grid(const string&);
-        void                    solve_all(const string&, const string&, const double&);
+        void                    solve_all(const string&, const string&, double);
         void                    test();
         void                    display_input();
         void                    display_parsed_grid();
