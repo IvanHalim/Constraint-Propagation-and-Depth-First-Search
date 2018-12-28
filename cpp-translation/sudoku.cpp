@@ -490,12 +490,11 @@ void sudoku::test() {
 void sudoku::solve_all(const string &file_name, const string &name, const double &show_if) {
     string grid;
     vector<bool> results;
-    int N;
+    int N, frequency;
     int sum_results = 0;
     double sum_time = 0;
     double max_time = 0;
     double avg_time;
-    int frequency;
     ifstream myfile(file_name);
 
     if (myfile.is_open()) {
