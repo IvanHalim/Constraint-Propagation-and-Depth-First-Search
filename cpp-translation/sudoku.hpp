@@ -41,6 +41,7 @@ class sudoku {
         sudoku();
         bool                    solve(const string&);
         void                    solve_all(const string&, const string&);
+        void                    test();
         void                    display_input();
         void                    display_parsed_grid();
         void                    display_solution();

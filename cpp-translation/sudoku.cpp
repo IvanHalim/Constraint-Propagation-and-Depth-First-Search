@@ -472,6 +472,21 @@ bool sudoku::solve(const string &grid) {
                                     SYSTEM TEST
 ***************************************************************************************/
 
+void sudoku::test() {
+    assert(squares.size() == 81);
+    assert(unitlist.size() == 27);
+    for (const auto &u : units) {
+        assert(u.second.size() == 3);
+        for (const auto &unit : u.second) {
+            assert(unit.size() == 9);
+        }
+    }
+    for (const auto &p : peers) {
+        assert(p.second.size() == 20);
+    }
+    cout << "All tests pass." << endl;
+}
+
 void sudoku::solve_all(const string &file_name, const string &name) {
     string grid;
     vector<bool> results;
