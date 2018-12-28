@@ -14,9 +14,9 @@ int main() {
     mySudoku.solve_all("../input/hardest.txt", "hardest");
     cout << endl;
 
-    string diabolical  = ".....6....59.....82....8....45........3........6..3.54...325..6..................";
+    string spawn_of_hell  = ".....6....59.....82....8....45........3........6..3.54...325..6..................";
     auto t1 = std::chrono::high_resolution_clock::now();
-    mySudoku.solve(diabolical);
+    mySudoku.solve(spawn_of_hell);
     auto t2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = t2 - t1;
 
