@@ -487,7 +487,7 @@ void sudoku::test() {
     cout << "All tests pass." << endl;
 }
 
-void sudoku::solve_all(const string &file_name, const string &name) {
+void sudoku::solve_all(const string &file_name, const string &name, const double& show_if) {
     string grid;
     vector<bool> results;
     size_t N;
@@ -500,7 +500,7 @@ void sudoku::solve_all(const string &file_name, const string &name) {
 
     if (myfile.is_open()) {
         while (getline(myfile, grid)) {
-            time_solve(grid, results, sum_time, max_time);
+            time_solve(grid, results, sum_time, max_time, show_if);
         }
         myfile.close();
     } else {
@@ -522,7 +522,7 @@ void sudoku::solve_all(const string &file_name, const string &name) {
             << avg_time << " secs (" << frequency << " Hz), max " << max_time << " secs)." << endl;
 }
 
-void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time) {
+void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time, const double& show_if) {
     auto t1 = std::chrono::high_resolution_clock::now();
     solve(grid);
     auto t2 = std::chrono::high_resolution_clock::now();
@@ -532,6 +532,13 @@ void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_t
         max_time = elapsed.count();
     }
     results.push_back(solved(solution));
+
+    if (elapsed.count() > show_if && show_if != 0) {
+        cout << endl;
+        display_input();
+        display_solution();
+        cout << '(' << elapsed.count() << " seconds)" << endl << endl;
+    }
 }
 
 bool sudoku::solved(map<string, string> &values) {
