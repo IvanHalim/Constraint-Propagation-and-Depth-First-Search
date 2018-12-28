@@ -30,7 +30,6 @@ class sudoku {
 
         //Helper functions
         map<string, string>     grid_values(const string&);
-        bool                    parse_grid(const string&);
         bool                    assign(map<string, string>&, const string&, const string&);
         bool                    eliminate(map<string, string>&, const string&, const string&);
         void                    display(map<string, string>&);
@@ -40,6 +39,7 @@ class sudoku {
     public:
         sudoku();
         bool                    solve(const string&);
+        bool                    parse_grid(const string&);
         void                    solve_all(const string&, const string&);
         void                    test();
         void                    display_input();

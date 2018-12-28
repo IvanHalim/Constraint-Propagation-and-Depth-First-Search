@@ -504,7 +504,7 @@ void sudoku::solve_all(const string &file_name, const string &name) {
         }
         myfile.close();
     } else {
-        cout << "Unable to open file" << endl;
+        cout << "Unable to open file." << endl;
     }
 
     N = results.size();

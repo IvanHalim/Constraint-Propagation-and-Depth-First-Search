@@ -21,6 +21,7 @@ int main() {
     std::chrono::duration<double> elapsed = t2 - t1;
 
     mySudoku.display_input();
+    mySudoku.display_parsed_grid();
     mySudoku.display_solution();
     cout << elapsed.count() << " secs" << endl << endl;
 
