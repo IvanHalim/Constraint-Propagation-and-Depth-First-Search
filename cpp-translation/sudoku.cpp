@@ -5,6 +5,9 @@
 #include <set>
 #include <cassert>
 #include <cmath>
+#include <fstream>
+#include <chrono>
+#include <iomanip>
 #include "sudoku.hpp"
 
 using std::cout;
@@ -13,6 +16,9 @@ using std::string;
 using std::vector;
 using std::map;
 using std::set;
+using std::ifstream;
+using std::fixed;
+using std::setprecision;
 
 /***************************************************************************************
                                     HELPER FUNCTIONS
@@ -459,6 +465,80 @@ bool sudoku::solve(const string &grid) {
         solution["A1"] = "false";
         return false;
     }
+    return true;
+}
+
+/***************************************************************************************
+                                    SYSTEM TEST
+***************************************************************************************/
+
+void sudoku::solve_all(const string &file_name, const string &name) {
+    string grid;
+    vector<bool> results;
+    size_t N;
+    int sum_results = 0;
+    double sum_time = 0;
+    double max_time = 0;
+    double avg_time;
+    int frequency;
+    ifstream myfile(file_name);
+
+    if (myfile.is_open()) {
+        while (getline(myfile, grid)) {
+            time_solve(grid, results, sum_time, max_time);
+        }
+        myfile.close();
+    } else {
+        cout << "Unable to open file" << endl;
+    }
+
+    N = results.size();
+    avg_time = sum_time / N;
+    frequency = N / sum_time;
+
+    for (const auto &r : results) {
+        if (r) {
+            sum_results++;
+        }
+    }
+
+    cout << fixed << setprecision(2);
+    cout << "Solved " << sum_results << " of " << N << " " << name << " puzzles (avg "
+            << avg_time << " secs (" << frequency << " Hz), max " << max_time << " secs)." << endl;
+}
+
+void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time) {
+    auto t1 = std::chrono::high_resolution_clock::now();
+    solve(grid);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = t2 - t1;
+    sum_time += elapsed.count();
+    if (elapsed.count() > max_time) {
+        max_time = elapsed.count();
+    }
+    results.push_back(solved(solution));
+}
+
+bool sudoku::solved(map<string, string> &values) {
+    if (values["A1"] == "false") {
+        return false;
+    }
+
+    set<string> set_digits;
+    for (size_t i = 0; i < digits.length(); i++) {
+        set_digits.insert(digits.substr(i, 1));
+    }
+
+    for (const auto &unit : unitlist) {
+        set<string> set_val;
+        for (const auto &s : unit) {
+            set_val.insert(values[s]);
+        }
+        if (set_val != set_digits) {
+            return false;
+        }
+    }
+
     return true;
 }
 
