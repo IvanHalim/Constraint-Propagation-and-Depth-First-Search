@@ -14,7 +14,7 @@ using std::set;
 class sudoku {
     private:
         //Variables
-        int                                  size;
+        int                                     size;
         string                                  digits;
         string                                  rows;
         string                                  cols;
