@@ -506,7 +506,7 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
         cout << "Unable to open file." << endl;
     }
 
-    N = static_cast<int>(results.size());
+    N = results.size();
     avg_time = sum_time / N;
     frequency = N / sum_time;
 
