@@ -490,7 +490,7 @@ void sudoku::test() {
 void sudoku::solve_all(const string &file_name, const string &name, const double &show_if) {
     string grid;
     vector<bool> results;
-    size_t N;
+    int N;
     int sum_results = 0;
     double sum_time = 0;
     double max_time = 0;
@@ -507,7 +507,7 @@ void sudoku::solve_all(const string &file_name, const string &name, const double
         cout << "Unable to open file." << endl;
     }
 
-    N = results.size();
+    N = static_cast<int>(results.size());
     avg_time = sum_time / N;
     frequency = N / sum_time;
 
