@@ -2,7 +2,6 @@
 #include <chrono>
 #include "sudoku.hpp"
 
-using std::cin;
 using std::cout;
 using std::endl;
 
