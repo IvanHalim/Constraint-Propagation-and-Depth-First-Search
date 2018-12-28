@@ -19,6 +19,8 @@ using std::set;
 using std::ifstream;
 using std::fixed;
 using std::setprecision;
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
 
 /***************************************************************************************
                                     HELPER FUNCTIONS
@@ -522,10 +524,10 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
 }
 
 void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time, double show_if) {
-    auto t1 = std::chrono::high_resolution_clock::now();
+    auto t1 = high_resolution_clock::now();
     solve(grid);
-    auto t2 = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = t2 - t1;
+    auto t2 = high_resolution_clock::now();
+    duration<double> elapsed = t2 - t1;
     sum_time += elapsed.count();
     if (elapsed.count() > max_time) {
         max_time = elapsed.count();

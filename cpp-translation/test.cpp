@@ -4,6 +4,8 @@
 
 using std::cout;
 using std::endl;
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
 
 int main() {
     sudoku mySudoku;
@@ -15,10 +17,10 @@ int main() {
 
     cout << "Solving diabolical puzzle...";
     string spawn_of_hell  = ".....6....59.....82....8....45........3........6..3.54...325..6..................";
-    auto t1 = std::chrono::high_resolution_clock::now();
+    auto t1 = high_resolution_clock::now();
     mySudoku.solve(spawn_of_hell);
-    auto t2 = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = t2 - t1;
+    auto t2 = high_resolution_clock::now();
+    duration<double> elapsed = t2 - t1;
 
     cout << endl << endl;
     mySudoku.display_input();
