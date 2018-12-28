@@ -535,8 +535,8 @@ void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_t
 
     if (elapsed.count() > show_if && show_if != 0) {
         cout << endl;
-        display_input();
-        display_solution();
+        display(input);
+        display(solution);
         cout << '(' << elapsed.count() << " seconds)" << endl << endl;
     }
 }
