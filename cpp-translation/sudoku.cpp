@@ -8,8 +8,6 @@ using std::cout;
 using std::endl;
 using std::ifstream;
 using std::ios;
-using std::ios_base;
-using std::streamsize;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
 
@@ -510,8 +508,8 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
         }
     }
 
-    ios_base::fmtflags originalflags = cout.flags();
-    streamsize originalprecision = cout.precision();
+    auto originalflags = cout.flags();
+    auto originalprecision = cout.precision();
     cout.setf(ios::fixed);
     cout.precision(2);
     cout << "Solved " << sum_results << " of " << N << " " << name << " puzzles (avg "
