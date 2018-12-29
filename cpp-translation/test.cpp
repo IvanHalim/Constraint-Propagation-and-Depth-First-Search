@@ -3,7 +3,6 @@
 #include "sudoku.hpp"
 
 using std::cout;
-using std::endl;
 using std::flush;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
@@ -27,8 +26,8 @@ int main() {
     mySudoku.display_parsed_grid();
     mySudoku.display_solution();
 
-    printf("(%.2f seconds)\n", elapsed.count());
-    cout << endl;
+    printf("(%.2f seconds)\n\n", elapsed.count());
+    fflush(stdout);
 
     system("pause");
     return 0;
