@@ -7,7 +7,6 @@
 using std::cout;
 using std::endl;
 using std::ifstream;
-using std::ios;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
 
@@ -508,14 +507,9 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
         }
     }
 
-    auto originalflags = cout.flags();
-    auto originalprecision = cout.precision();
-    cout.setf(ios::fixed);
-    cout.precision(2);
-    cout << "Solved " << sum_results << " of " << N << " " << name << " puzzles (avg "
-            << avg_time << " secs (" << frequency << " Hz), max " << max_time << " secs)." << endl;
-    cout.precision(originalprecision);
-    cout.flags(originalflags);
+    printf("Solved %d of %d %s puzzles (avg %.2f secs (%d Hz), max %.2f secs).\n",
+            sum_results, N, name.c_str(), avg_time, frequency, max_time);
+    fflush(stdout);
 }
 
 void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time, double show_if) {

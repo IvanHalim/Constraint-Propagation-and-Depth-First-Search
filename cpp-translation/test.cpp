@@ -29,9 +29,8 @@ int main() {
     mySudoku.display_parsed_grid();
     mySudoku.display_solution();
 
-    cout.setf(ios::fixed);
-    cout.precision(2);
-    cout << '(' << elapsed.count() << " seconds)\n" << endl;
+    printf("(%.2f seconds)\n", elapsed.count());
+    fflush(stdout);
 
     system("pause");
     return 0;
