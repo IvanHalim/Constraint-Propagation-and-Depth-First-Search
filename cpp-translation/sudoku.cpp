@@ -511,12 +511,12 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
     }
 
     ios_base::fmtflags originalflags = cout.flags();
-    streamsize ss = cout.precision();
+    streamsize originalprecision = cout.precision();
     cout.setf(ios::fixed);
     cout.precision(2);
     cout << "Solved " << sum_results << " of " << N << " " << name << " puzzles (avg "
             << avg_time << " secs (" << frequency << " Hz), max " << max_time << " secs)." << endl;
-    cout.precision(ss);
+    cout.precision(originalprecision);
     cout.flags(originalflags);
 }
 
