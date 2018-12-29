@@ -30,10 +30,10 @@ class sudoku {
         map<string, string>     grid_values(const string&);
         bool                    assign(map<string, string>&, const string&, const string&);
         bool                    eliminate(map<string, string>&, const string&, const string&);
-        void                    display(map<string, string>);
+        void                    display(map<string, string>&);
         bool                    search(map<string, string>&);
         void                    time_solve(const string&, vector<bool>&, double&, double&, double);
-        bool                    solved(map<string, string>);
+        bool                    solved(map<string, string>&);
     public:
         sudoku();
         bool                    solve(const string&);

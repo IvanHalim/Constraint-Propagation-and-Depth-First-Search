@@ -159,7 +159,7 @@ string create_line(int width, int size) {
  *             print line
  *     print
  */
-void sudoku::display(map<string, string> values) {
+void sudoku::display(map<string, string> &values) {
     if (values["A1"] == "false") {
         cout << "**NO SOLUTION IS FOUND**\n" << endl;
         return;
@@ -543,7 +543,7 @@ void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_t
     }
 }
 
-bool sudoku::solved(map<string, string> values) {
+bool sudoku::solved(map<string, string> &values) {
     if (values["A1"] == "false") {
         return false;
     }
