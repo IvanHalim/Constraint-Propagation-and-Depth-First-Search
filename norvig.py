@@ -155,6 +155,6 @@ hard1  = '.....6....59.....82....8....45........3........6..3.54...325..6.......
 
 if __name__ == '__main__':
     test()
-    solve_all(open("easy50.txt"), "easy")
-    solve_all(open("top95.txt"), "hard")
-    solve_all(open("hardest.txt"), "hardest")
+    solve_all(open("input/easy50.txt"), "easy")
+    solve_all(open("input/top95.txt"), "hard")
+    solve_all(open("input/hardest.txt"), "hardest")
