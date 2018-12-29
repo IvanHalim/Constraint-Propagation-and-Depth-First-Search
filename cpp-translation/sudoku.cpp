@@ -161,7 +161,7 @@ string create_line(int width, int size) {
  */
 void sudoku::display(map<string, string> values) {
     if (values["A1"] == "false") {
-        cout << "**NO SOLUTION IS FOUND**" << endl << endl;
+        cout << "**NO SOLUTION IS FOUND**\n" << endl;
         return;
     }
     int width = 1 + find_max_length(values);
@@ -173,9 +173,9 @@ void sudoku::display(map<string, string> values) {
                 cout << "|";
             }
         }
-        cout << endl;
+        cout << '\n';
         if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
-            cout << line << endl;
+            cout << line << '\n';
         }
     }
     cout << endl;
@@ -506,6 +506,7 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
         myfile.close();
     } else {
         cout << "Unable to open file." << endl;
+        return;
     }
 
     N = results.size();
@@ -535,10 +536,10 @@ void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_t
     results.push_back(solved(solution));
 
     if (elapsed.count() > show_if && show_if != 0) {
-        cout << endl;
+        cout << '\n';
         display(input);
         display(solution);
-        cout << '(' << elapsed.count() << " seconds)" << endl << endl;
+        cout << '(' << elapsed.count() << " seconds)\n" << endl;
     }
 }
 
