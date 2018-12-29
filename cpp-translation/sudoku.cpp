@@ -4,7 +4,6 @@
 #include <map>
 #include <set>
 #include <cassert>
-#include <cmath>
 #include <fstream>
 #include <chrono>
 #include <iomanip>
@@ -19,6 +18,7 @@ using std::set;
 using std::ifstream;
 using std::fixed;
 using std::setprecision;
+using std::ios_base;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
 
@@ -135,11 +135,11 @@ bool solved(const map<string, string> &values) {
  */
 string create_line(int width, int size) {
     string line;
-    for (int i = 0; i < pow(size, 2); ++i) {
+    for (int i = 0; i < size*size; ++i) {
         for (int j = 0; j < width; ++j) {
             line += '-';
         }
-        if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
+        if ((i + 1) % size == 0 && (i + 1) < size*size) {
             line += '+';
         }
     }
@@ -168,13 +168,13 @@ void sudoku::display(map<string, string> &values) {
     string line = create_line(width, size);
     for (int i = 0; i < rows.length(); ++i) {
         for (int j = 0; j < cols.length(); ++j) {
-            cout << center_string(values[squares[i*pow(size, 2)+j]], width);
-            if ((j + 1) % size == 0 && (j + 1) < pow(size, 2)) {
+            cout << center_string(values[squares[i * size*size + j]], width);
+            if ((j + 1) % size == 0 && (j + 1) < size*size) {
                 cout << '|';
             }
         }
         cout << '\n';
-        if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
+        if ((i + 1) % size == 0 && (i + 1) < size*size) {
             cout << line << '\n';
         }
     }
@@ -225,7 +225,7 @@ sudoku::sudoku() {
      */
     vector<string> rows_threes;
     vector<string> cols_threes;
-    for (int i = 0; i < pow(size, 2); i += size) {
+    for (int i = 0; i < size*size; i += size) {
         rows_threes.push_back(rows.substr(i, size));
         cols_threes.push_back(cols.substr(i, size));
     }
@@ -519,9 +519,11 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
         }
     }
 
+    ios_base::fmtflags originalflags = cout.flags();
     cout << fixed << setprecision(2);
     cout << "Solved " << sum_results << " of " << N << " " << name << " puzzles (avg "
             << avg_time << " secs (" << frequency << " Hz), max " << max_time << " secs)." << endl;
+    cout.flags(originalflags);
 }
 
 void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time, double show_if) {

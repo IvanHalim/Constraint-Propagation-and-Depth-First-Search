@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <iomanip>
 #include "sudoku.hpp"
 
 using std::cout;
@@ -7,6 +8,9 @@ using std::endl;
 using std::flush;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
+using std::ios_base;
+using std::fixed;
+using std::setprecision;
 
 int main() {
     sudoku mySudoku;
@@ -27,7 +31,11 @@ int main() {
     mySudoku.display_input();
     mySudoku.display_parsed_grid();
     mySudoku.display_solution();
+
+    ios_base::fmtflags originalflags = cout.flags();
+    cout << fixed << setprecision(2);
     cout << '(' << elapsed.count() << " seconds)\n" << endl;
+    cout.flags(originalflags);
 
     system("pause");
     return 0;
