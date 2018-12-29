@@ -5,7 +5,6 @@
 using std::cout;
 using std::endl;
 using std::flush;
-using std::ios;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
 
@@ -15,9 +14,8 @@ int main() {
     mySudoku.solve_all("../input/easy50.txt", "easy", 0.2);
     mySudoku.solve_all("../input/top95.txt", "hard", 0.2);
     mySudoku.solve_all("../input/hardest.txt", "hardest", 0.2);
-    cout << '\n';
 
-    cout << "Solving diabolical puzzle..." << flush;
+    cout << "\nSolving diabolical puzzle..." << flush;
     string spawn_of_hell  = ".....6....59.....82....8....45........3........6..3.54...325..6..................";
     auto t1 = high_resolution_clock::now();
     mySudoku.solve(spawn_of_hell);
@@ -30,7 +28,7 @@ int main() {
     mySudoku.display_solution();
 
     printf("(%.2f seconds)\n", elapsed.count());
-    fflush(stdout);
+    cout << endl;
 
     system("pause");
     return 0;

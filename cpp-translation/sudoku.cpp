@@ -507,9 +507,9 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
         }
     }
 
-    printf("Solved %d of %d %s puzzles (avg %.2f secs (%d Hz), max %.2f secs).\n",
+    printf("Solved %d of %d %s puzzles (avg %.2f secs (%d Hz), max %.2f secs).",
             sum_results, N, name.c_str(), avg_time, frequency, max_time);
-    fflush(stdout);
+    cout << endl;
 }
 
 void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_time, double &max_time, double show_if) {
@@ -527,7 +527,8 @@ void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_t
         cout << '\n';
         display(input);
         display(solution);
-        cout << '(' << elapsed.count() << " seconds)\n" << endl;
+        printf("(%.2f seconds)\n", elapsed.count());
+        cout << endl;
     }
 }
 
