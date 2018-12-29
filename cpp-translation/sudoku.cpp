@@ -1,24 +1,15 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <set>
 #include <cassert>
 #include <fstream>
 #include <chrono>
-#include <iomanip>
 #include "sudoku.hpp"
 
 using std::cout;
 using std::endl;
-using std::string;
-using std::vector;
-using std::map;
-using std::set;
 using std::ifstream;
-using std::fixed;
-using std::setprecision;
+using std::ios;
 using std::ios_base;
+using std::streamsize;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
 
@@ -520,9 +511,12 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
     }
 
     ios_base::fmtflags originalflags = cout.flags();
-    cout << fixed << setprecision(2);
+    streamsize ss = cout.precision();
+    cout.setf(ios::fixed);
+    cout.precision(2);
     cout << "Solved " << sum_results << " of " << N << " " << name << " puzzles (avg "
             << avg_time << " secs (" << frequency << " Hz), max " << max_time << " secs)." << endl;
+    cout.precision(ss);
     cout.flags(originalflags);
 }
 
