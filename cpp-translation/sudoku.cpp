@@ -135,8 +135,8 @@ bool solved(const map<string, string> &values) {
  */
 string create_line(int width, int size) {
     string line;
-    for (int i = 0; i < pow(size, 2); i++) {
-        for (int j = 0; j < width; j++) {
+    for (int i = 0; i < pow(size, 2); ++i) {
+        for (int j = 0; j < width; ++j) {
             line += '-';
         }
         if ((i + 1) % size == 0 && (i + 1) < pow(size, 2)) {
@@ -166,8 +166,8 @@ void sudoku::display(map<string, string> values) {
     }
     int width = 1 + find_max_length(values);
     string line = create_line(width, size);
-    for (int i = 0; i < rows.length(); i++) {
-        for (int j = 0; j < cols.length(); j++) {
+    for (int i = 0; i < rows.length(); ++i) {
+        for (int j = 0; j < cols.length(); ++j) {
             cout << center_string(values[squares[i*pow(size, 2)+j]], width);
             if ((j + 1) % size == 0 && (j + 1) < pow(size, 2)) {
                 cout << '|';
@@ -193,7 +193,7 @@ void sudoku::display(map<string, string> values) {
  */
 map<string, string> sudoku::grid_values(const string &grid) {
     vector<string> chars;
-    for (int i = 0; i < grid.length(); i++) {
+    for (int i = 0; i < grid.length(); ++i) {
         if (string_contains(digits, grid.substr(i, 1))) {
             chars.push_back(grid.substr(i, 1));
         } else if (string_contains("0.", grid.substr(i, 1))) {
@@ -202,7 +202,7 @@ map<string, string> sudoku::grid_values(const string &grid) {
     }
     assert(chars.size() == squares.size());
     map<string, string> grid_val;
-    for (int i = 0; i < squares.size(); i++) {
+    for (int i = 0; i < squares.size(); ++i) {
         grid_val[squares[i]] = chars[i];
     }
     return grid_val;
@@ -237,10 +237,10 @@ sudoku::sudoku() {
      *             [cross(r, cols) for r in rows] +
      *             [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
      */
-    for (int i = 0; i < rows.length(); i++) {
+    for (int i = 0; i < rows.length(); ++i) {
         unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
-    for (int i = 0; i < digits.length(); i++) {
+    for (int i = 0; i < digits.length(); ++i) {
         unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
     for (const auto &rs : rows_threes) {
@@ -356,7 +356,7 @@ bool sudoku::parse_grid(const string &grid) {
  */
 bool sudoku::assign(map<string, string> &values, const string &s, const string &d) {
     string other_values = string_eliminate(values[s], d);
-    for (int i = 0; i < other_values.length(); i++) {
+    for (int i = 0; i < other_values.length(); ++i) {
         if (!eliminate(values, s, other_values.substr(i, 1))) {
             return false;
         }
@@ -450,7 +450,7 @@ bool sudoku::search(map<string, string> &values) {
     }
     string s = find_min_possibilities(values);
     map<string, string> copy = values;
-    for (int i = 0; i < values[s].length(); i++) {
+    for (int i = 0; i < values[s].length(); ++i) {
         if (assign(values, s, values[s].substr(i, 1))) {
             if (search(values)) {
                 return true;
@@ -515,7 +515,7 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
 
     for (const auto &r : results) {
         if (r) {
-            sum_results++;
+            ++sum_results;
         }
     }
 
@@ -549,7 +549,7 @@ bool sudoku::solved(map<string, string> values) {
     }
 
     set<string> set_digits;
-    for (int i = 0; i < digits.length(); i++) {
+    for (int i = 0; i < digits.length(); ++i) {
         set_digits.insert(digits.substr(i, 1));
     }
 
