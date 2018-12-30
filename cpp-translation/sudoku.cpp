@@ -432,12 +432,13 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
 bool sudoku::search(map<string, string> &values) {
     if (values["A1"] == "false") {
         return false;
-    }
-    if (solved(values)) {
+    } else if (solved(values)) {
         return true;
     }
+
     string s = find_min_possibilities(values, size);
     map<string, string> copy = values;
+
     for (int i = 0; i < values[s].length(); ++i) {
         if (assign(values, s, values[s].substr(i, 1))) {
             if (search(values)) {
@@ -446,6 +447,7 @@ bool sudoku::search(map<string, string> &values) {
         }
         values = copy;
     }
+
     return false;
 }
 
@@ -517,10 +519,12 @@ void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_t
     solve(grid);
     auto t2 = high_resolution_clock::now();
     duration<double> elapsed = t2 - t1;
+
     sum_time += elapsed.count();
     if (elapsed.count() > max_time) {
         max_time = elapsed.count();
     }
+
     results.push_back(solved(solution));
 
     if (elapsed.count() > show_if && show_if != 0) {
