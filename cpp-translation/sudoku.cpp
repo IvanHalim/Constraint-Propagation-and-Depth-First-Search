@@ -504,15 +504,15 @@ void sudoku::solve_all(const string &file_name, const string &name, double show_
         return;
     }
 
-    N = results.size();
-    avg_time = sum_time / N;
-    frequency = N / sum_time;
-
     for (const auto &r : results) {
         if (r) {
             ++sum_results;
         }
     }
+
+    N = results.size();
+    avg_time = sum_time / N;
+    frequency = N / sum_time;
 
     printf("Solved %d of %d %s puzzles (avg %.2f secs (%d Hz), max %.2f secs).\n",
             sum_results, N, name.c_str(), avg_time, frequency, max_time);
