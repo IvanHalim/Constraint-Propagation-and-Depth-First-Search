@@ -152,16 +152,21 @@ void sudoku::display(map<string, string> &values) {
         cout << "**NO SOLUTION IS FOUND**\n" << endl;
         return;
     }
+
     int width = 1 + find_max_length(values);
     string line = create_line(width, size);
+
     for (int i = 0; i < rows.length(); ++i) {
         for (int j = 0; j < cols.length(); ++j) {
+
             cout << center_string(values[squares[i * size*size + j]], width);
+
             if ((j + 1) % size == 0 && (j + 1) < size*size) {
                 cout << '|';
             }
         }
         cout << '\n';
+
         if ((i + 1) % size == 0 && (i + 1) < size*size) {
             cout << line << '\n';
         }
