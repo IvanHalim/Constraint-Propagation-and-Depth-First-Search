@@ -108,7 +108,7 @@ string find_min_possibilities(const map<string, string> &values, int size) {
 /*
  * A helper function to check if a grid is solved
  */
-bool solved(const map<string, string> &values) {
+bool all_ones(const map<string, string> &values) {
     for (const auto &i : values) {
         if ((i.second).length() != 1) {
             return false;
@@ -437,7 +437,7 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
 bool sudoku::search(map<string, string> &values) {
     if (values["A1"] == "false") {
         return false;
-    } else if (solved(values)) {
+    } else if (all_ones(values)) {
         return true;
     }
 
