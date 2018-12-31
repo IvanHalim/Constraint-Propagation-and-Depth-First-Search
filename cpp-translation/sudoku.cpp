@@ -396,7 +396,6 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
     }
     vector<string> dplaces;
     for (const auto &u : units[s]) {
-        dplaces.clear();
         for (const auto &s : u) {
             if (string_contains(values[s], d)) {
                 dplaces.push_back(s);
@@ -409,6 +408,7 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
                 return false;
             }
         }
+        dplaces.clear();
     }
     return true;
 }
@@ -552,13 +552,13 @@ bool sudoku::solved(map<string, string> &values) {
 
     set<string> set_val;
     for (const auto &unit : unitlist) {
-        set_val.clear();
         for (const auto &s : unit) {
             set_val.insert(values[s]);
         }
         if (set_val != set_digits) {
             return false;
         }
+        set_val.clear();
     }
 
     return true;
