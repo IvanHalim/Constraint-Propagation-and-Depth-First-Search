@@ -20,12 +20,13 @@ using std::chrono::duration;
  */
 vector<string> cross(const string &A, const string &B) {
     vector<string> cross;
+    string sq;
     for (const auto &a : A) {
         for (const auto &b : B) {
-            string sq;
             sq += a;
             sq += b;
             cross.push_back(sq);
+            sq.clear();
         }
     }
     return cross;
