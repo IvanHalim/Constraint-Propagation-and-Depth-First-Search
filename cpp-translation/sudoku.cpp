@@ -184,7 +184,7 @@ void sudoku::display(map<string, string> &values) {
  *     assert len(chars) == 81
  *     return dict(zip(squares, chars))
  */
-map<string, string> sudoku::grid_values(const string &grid) {
+void sudoku::grid_values(const string &grid, map<string, string> &grid_val) {
     vector<string> chars;
     for (int i = 0; i < grid.length(); ++i) {
         if (string_contains(digits, grid.substr(i, 1))) {
@@ -194,11 +194,9 @@ map<string, string> sudoku::grid_values(const string &grid) {
         }
     }
     assert(chars.size() == squares.size());
-    map<string, string> grid_val;
     for (int i = 0; i < squares.size(); ++i) {
         grid_val[squares[i]] = chars[i];
     }
-    return grid_val;
 }
 
 /***************************************************************************************
@@ -322,7 +320,7 @@ bool sudoku::parse_grid(const string &grid) {
     for (const auto &s : squares) {
         solution[s] = digits;
     }
-    input = grid_values(grid);
+    grid_values(grid, input);
     for (const auto &i : input) {
         if (string_contains(digits, i.second) && !assign(solution, i.first, i.second)) {
             solution["A1"] = "false";
@@ -396,8 +394,9 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
             }
         }
     }
+    vector<string> dplaces;
     for (const auto &u : units[s]) {
-        vector<string> dplaces;
+        dplaces.clear();
         for (const auto &s : u) {
             if (string_contains(values[s], d)) {
                 dplaces.push_back(s);
@@ -551,8 +550,9 @@ bool sudoku::solved(map<string, string> &values) {
         set_digits.insert(digits.substr(i, 1));
     }
 
+    set<string> set_val;
     for (const auto &unit : unitlist) {
-        set<string> set_val;
+        set_val.clear();
         for (const auto &s : unit) {
             set_val.insert(values[s]);
         }

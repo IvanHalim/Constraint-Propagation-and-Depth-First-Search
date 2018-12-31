@@ -27,7 +27,7 @@ class sudoku {
         map<string, string>                     solution;
 
         //Helper functions
-        map<string, string>     grid_values(const string&);
+        void                    grid_values(const string&, map<string, string>&);
         bool                    assign(map<string, string>&, const string&, const string&);
         bool                    eliminate(map<string, string>&, const string&, const string&);
         void                    display(map<string, string>&);
