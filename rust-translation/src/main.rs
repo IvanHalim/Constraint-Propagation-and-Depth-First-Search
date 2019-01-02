@@ -12,9 +12,9 @@ struct context {
 
 fn cross(A: &[char], B: &[char]) -> Vec<String> {
     let mut cross : Vec<String> = Vec::new();
-    let mut sq = String::new();
     for a in A {
         for b in B {
+            let mut sq = String::new();
             sq.push(*a);
             sq.push(*b);
             cross.push(sq)
