@@ -36,6 +36,7 @@ fn grid_values(grid: &str, ctx: &context) -> HashMap<String, Vec<char>> {
 
 fn parse_grid(grid: &str, ctx: &context) -> Option<HashMap<String, Vec<char>>> {
     let mut values : HashMap<String, Vec<char>> = HashMap::new();
+    //ctx.squares.iter().cloned().zip(ctx.cols.clone()).collect();
     for s in &ctx.squares {
         values.insert(s.clone(), ctx.cols.clone());
     }
@@ -47,4 +48,10 @@ fn parse_grid(grid: &str, ctx: &context) -> Option<HashMap<String, Vec<char>>> {
         }
     }
     Some(values)
+}
+
+fn assign(values: &mut HashMap<String, Vec<char>>, s: &str, d: &char, ctx: &context) -> bool {
+    let other_values : Vec<char> =
+        values[s].iter().filter(|d2| d2 != d).cloned().collect();
+    other_values.iter().all(|d2| eliminate(values, s, d2, ctx))
 }
