@@ -65,6 +65,7 @@ fn eliminate(values: &mut HashMap<String, Vec<char>>, s: &str, d: &char, ctx: &c
     //values[s].remove(index);
     values.get_mut(s).unwrap().remove(index);
 
+    //let d2 = values[s].clone();
     if values[s].is_empty() {
         return false;
     } else if values[s].len() == 1 {
@@ -72,4 +73,18 @@ fn eliminate(values: &mut HashMap<String, Vec<char>>, s: &str, d: &char, ctx: &c
             return false;
         }
     }
+
+    for u in &ctx.units[s] {
+        let dplaces : Vec<String> =
+            u.iter().cloned().filter(|s2| values[s2].contains(d)).collect();
+        if dplaces.is_empty() {
+            return false;
+        } else if dplaces.len() == 1 {
+            if !assign(values, &dplaces[0], d, ctx) {
+                return false;
+            }
+        }
+    }
+
+    true
 }
