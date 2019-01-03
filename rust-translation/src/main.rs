@@ -51,6 +51,25 @@ fn parse_grid(grid: &str, ctx: &context) -> Option<HashMap<String, Vec<char>>> {
 
 fn assign(values: &mut HashMap<String, Vec<char>>, s: &str, d: &char, ctx: &context) -> bool {
     let other_values : Vec<char> =
+        //values[s].iter().cloned().filter(|d2| d2 != d).collect();
         values[s].iter().filter(|d2| d2 != d).cloned().collect();
     other_values.iter().all(|d2| eliminate(values, s, d2, ctx))
+}
+
+fn eliminate(values: &mut HashMap<String, Vec<char>>, s: &str, d: &char, ctx: &context) -> bool {
+    if !values[s].contains(d) {
+        return true;
+    }
+    //values[s].retain(|&d2| d2 != d);
+    let index = values[s].iter().position(|d2| d2 == d).unwrap();
+    //values[s].remove(index);
+    values.get_mut(s).unwrap().remove(index);
+
+    if values[s].is_empty() {
+        return false;
+    } else if values[s].len() == 1 {
+        if !ctx.peers[s].iter().all(|s2| eliminate(values, s2, &values[s][0], ctx)) {
+            return false;
+        }
+    }
 }
