@@ -1,4 +1,4 @@
-module SUDOKU where
+module Sudoku where
 
 type Square = (Char, Char)
 type Unit   = [Square]
