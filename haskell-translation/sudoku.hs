@@ -1,4 +1,4 @@
-module HW1 where
+module SUDOKU where
 
 type Square = (Char, Char)
 type Unit   = [Square]
