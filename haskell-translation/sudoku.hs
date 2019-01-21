@@ -48,15 +48,19 @@ parse_grid grid
     | regular grid = foldM assign emptyGrid (zip squares grid)
     | otherwise    = Nothing
 
+access :: Square -> Grid -> [Digit]
+access s g = fromJust (Map.lookup s g)
+
 assign :: Grid -> (Square, Digit) -> Maybe Grid
-assign g (s,d) = foldM (eliminate s) g (filter (/= d) (fromJust (Map.lookup s g)))
+assign g (s,d) = foldM (eliminate s) g (filter (/= d) (access s g))
 
 eliminate :: Square -> Grid -> Digit -> Maybe Grid
 eliminate = undefined
--- eliminate s g d
---     | not elem d (fromJust (Map.lookup s g))                  = Just g
---     | length (filter (/= d) (fromJust (Map.lookup s g))) == 0 = Nothing
---     | length (filter (/= d) (fromJust (Map.lookup s g))) == 1 =
+{-eliminate s g d
+    | not elem d (access s g)                  = Just g
+    | length (filter (/= d) (access s g)) == 0 = Nothing
+    | otherwise =-}
+
 
 main :: IO ()
 main = return ()
