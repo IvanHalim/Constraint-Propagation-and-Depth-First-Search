@@ -58,6 +58,5 @@ eliminate = undefined
 --     | length (filter (/= d) (fromJust (Map.lookup s g))) == 0 = Nothing
 --     | length (filter (/= d) (fromJust (Map.lookup s g))) == 1 =
 
-
 main :: IO ()
 main = return ()
