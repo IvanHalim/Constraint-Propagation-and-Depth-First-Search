@@ -39,8 +39,8 @@ peers = Map.fromList [(s, set (Map.lookup s units)) | s <- squares]
 
 parse_grid :: String -> Maybe Grid
 parse_grid grid
-    | all (`elem` "0.123456789") grid = foldM assign emptyGrid (zip squares grid)
-    | otherwise                       = Nothing
+    | length (filter (`elem` "0.123456789") grid) == 81 = foldM assign emptyGrid (zip squares grid)
+    | otherwise                                         = Nothing
     where
         emptyGrid = Map.fromList [(s, digits) | s <- squares]
 
