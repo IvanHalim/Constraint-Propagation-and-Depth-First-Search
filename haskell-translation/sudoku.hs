@@ -44,7 +44,7 @@ parse_grid = undefined
 
 grid_values :: String -> Maybe ([(Square, Char)])
 grid_values grid =
-    let chars = [c | c <- grid, elem c "0.123456789"] in
+    let chars = filter (`elem` "0.123456789") grid in
         if length chars /= 81 then Nothing
         else Just (zip squares chars)
 
