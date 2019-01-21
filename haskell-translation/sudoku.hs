@@ -4,6 +4,7 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.List
 import Data.Maybe
+import Control.Monad
 
 type Square = String
 type Unit   = [Square]
@@ -36,17 +37,18 @@ set (Just x) = nub (concat x)
 peers :: Map Square [Square]
 peers = Map.fromList [(s, set (Map.lookup s units)) | s <- squares]
 
-emptyGrid :: Grid
-emptyGrid = Map.fromList [(s, digits) | s <- squares]
-
 parse_grid :: String -> Maybe Grid
-parse_grid = undefined
+parse_grid grid
+    | all (`elem` "0.123456789") grid = foldM assign emptyGrid (zip squares grid)
+    | otherwise                       = Nothing
+    where
+        emptyGrid = Map.fromList [(s, digits) | s <- squares]
 
-grid_values :: String -> Maybe ([(Square, Char)])
-grid_values grid =
-    let chars = filter (`elem` "0.123456789") grid in
-        if length chars /= 81 then Nothing
-        else Just (zip squares chars)
+assign :: Grid -> (Square, Digit) -> Maybe Grid
+assign g (s,d) = foldM (eliminate s) g (filter (/= d) (fromJust (Map.lookup s g)))
+
+eliminate :: Square -> Grid -> Digit -> Maybe Grid
+eliminate = undefined
 
 main :: IO ()
 main = return ()
