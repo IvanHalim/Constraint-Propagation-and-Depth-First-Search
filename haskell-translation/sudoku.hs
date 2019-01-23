@@ -30,12 +30,13 @@ unitlist = [cross rows [c]  | c  <- cols] ++
 units :: Map Square [Unit]
 units = Map.fromList [(s, [filter (/= s) u | u <- unitlist, elem s u]) | s <- squares]
 
-set :: Eq a => Maybe [[a]] -> [a]
-set Nothing  = []
-set (Just x) = nub (concat x)
+access :: Square -> Map Square a -> a
+access s g = fromJust (Map.lookup s g)
 
 peers :: Map Square [Square]
-peers = Map.fromList [(s, set (Map.lookup s units)) | s <- squares]
+peers = Map.fromList [(s, set (access s units)) | s <- squares]
+    where
+        set = nub . concat
 
 regular :: String -> Bool
 regular grid = length (filter (`elem` "0.123456789") grid) == 81
@@ -47,9 +48,6 @@ parse_grid :: String -> Maybe Grid
 parse_grid grid
     | regular grid = foldM assign emptyGrid (zip squares grid)
     | otherwise    = Nothing
-
-access :: Square -> Grid -> [Digit]
-access s g = fromJust (Map.lookup s g)
 
 assign :: Grid -> (Square, Digit) -> Maybe Grid
 assign g (s,d) = foldM (eliminate s) g (filter (/= d) (access s g))
