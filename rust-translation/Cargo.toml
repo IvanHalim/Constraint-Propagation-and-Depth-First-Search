@@ -1,7 +1,0 @@
-[package]
-name = "rust-translation"
-version = "0.1.0"
-authors = ["ivanhalim <ivanhalim@users.noreply.github.com>"]
-edition = "2018"
-
-[dependencies]
