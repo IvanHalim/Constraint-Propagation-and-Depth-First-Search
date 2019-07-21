@@ -27,7 +27,7 @@ vector<string> cross(const string &A, const string &B) {
         for (const auto &b : B) {
             sq += a;
             sq += b;
-            cross.emplace_back(move(sq));
+            cross.push_back(move(sq));
         }
     }
     return cross;
@@ -190,9 +190,9 @@ void sudoku::grid_values(const string &grid, map<string, string> &grid_val) {
     vector<string> chars;
     for (int i = 0; i < grid.length(); ++i) {
         if (string_contains(digits, grid.substr(i, 1))) {
-            chars.emplace_back(grid.substr(i, 1));
+            chars.push_back(grid.substr(i, 1));
         } else if (string_contains("0.", grid.substr(i, 1))) {
-            chars.emplace_back(".");
+            chars.push_back(".");
         }
     }
     assert(chars.size() == squares.size());
@@ -219,8 +219,8 @@ sudoku::sudoku() {
     vector<string> rows_threes;
     vector<string> cols_threes;
     for (int i = 0; i < size*size; i += size) {
-        rows_threes.emplace_back(rows.substr(i, size));
-        cols_threes.emplace_back(cols.substr(i, size));
+        rows_threes.push_back(rows.substr(i, size));
+        cols_threes.push_back(cols.substr(i, size));
     }
 
     /*
@@ -231,14 +231,14 @@ sudoku::sudoku() {
      *             [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
      */
     for (int i = 0; i < rows.length(); ++i) {
-        unitlist.emplace_back(cross(rows.substr(i, 1), digits));
+        unitlist.push_back(cross(rows.substr(i, 1), digits));
     }
     for (int i = 0; i < digits.length(); ++i) {
-        unitlist.emplace_back(cross(rows, digits.substr(i, 1)));
+        unitlist.push_back(cross(rows, digits.substr(i, 1)));
     }
     for (const auto &rs : rows_threes) {
         for (const auto &cs : cols_threes) {
-            unitlist.emplace_back(cross(rs, cs));
+            unitlist.push_back(cross(rs, cs));
         }
     }
 
@@ -259,7 +259,7 @@ sudoku::sudoku() {
     for (const auto &s : squares) {
         for (const auto &u : unitlist) {
             if (vector_contains(u, s)) {
-                units[s].emplace_back(u);
+                units[s].push_back(u);
             }
         }
     }
@@ -400,7 +400,7 @@ bool sudoku::eliminate(map<string, string> &values, const string &s, const strin
     for (const auto &u : units[s]) {
         for (const auto &s : u) {
             if (string_contains(values[s], d)) {
-                dplaces.emplace_back(s);
+                dplaces.push_back(s);
             }
         }
         if (dplaces.size() == 0) {
@@ -531,7 +531,7 @@ void sudoku::time_solve(const string &grid, vector<bool> &results, double &sum_t
         max_time = elapsed.count();
     }
 
-    results.emplace_back(solved(solution));
+    results.push_back(solved(solution));
 
     if (elapsed.count() > show_if && show_if != 0) {
         cout << '\n';
